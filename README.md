@@ -46,7 +46,7 @@ Add reusable Slidev/Vue components to `components/` only when they reduce repeat
 
 ## Maintenance Rule
 
-The original Slides.com workshop is only the migration seed. After the initial port, this Slidev deck is the maintained narrative source.
+The initial Slides.com workshop content has been ported. Slides.com is only the migration seed; this Slidev deck is now the maintained narrative source.
 
 Use `botsi_platform` as the correctness source for Bubblescript behavior. These paths are in the `botsi_platform` repository, not this standalone Slidev deck:
 

@@ -1681,4 +1681,60 @@ say first(v)
 Lookup: botsi_platform/docs/docs/bubblescript/language.md
 </div>
 
-<!-- SECTION:LOOKUP_AND_CLOSE -->
+---
+
+## When You Have A New Idea
+
+Start by naming the shape of the idea:
+
+- Need to say or show something? Use statements: `say`, `ask`, `show`, `prompt`, `show card`, `show carousel`.
+- Need to catch user wording? Use BML intents and examples.
+- Need choices? Use `prompt`, quick replies, buttons, or a constrained input method.
+- Need reusable data? Use constants, lists, maps, and clear variable names.
+- Need decisions? Use `if`, `branch`, guards, and small confirmation dialogs.
+- Need background work? Use tasks for non-interactive work.
+- Need persistence or integrations? Use `remember`, tags, mail, CMS, or the platform docs.
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/getting_started.md
+</div>
+
+---
+
+## Docs Lookup Map
+
+- Getting started: `botsi_platform/docs/docs/bubblescript/getting_started.md`
+- Dialogs: `botsi_platform/docs/docs/bubblescript/dialogs.md`
+- Statements: `botsi_platform/docs/docs/bubblescript/statements.md`
+- BML: `botsi_platform/docs/docs/bubblescript/bml.md`
+- Variables: `botsi_platform/docs/docs/bubblescript/variables.md`
+- Constants: `botsi_platform/docs/docs/bubblescript/constants.md`
+- Tasks: `botsi_platform/docs/docs/bubblescript/tasks.md`
+- Schemas: `botsi_platform/docs/docs/bubblescript/schemas.md`
+
+---
+
+## Final Exercise
+
+Extend the Restaurant Sienna bot with one new capability.
+
+Pick one:
+
+- Add a dessert menu with prices and a total update.
+- Validate pickup time against opening hours.
+- Send an email confirmation after checkout.
+- Add an order-size guard for large group orders.
+- Improve fallback handling when the guest asks for something outside the menu.
+
+Keep the extension small:
+
+1. Add the smallest working version.
+2. Test the happy path.
+3. Test one wrong or surprising user answer.
+4. Add a lookup note for the docs you used.
+
+---
+
+# This Deck Is The Narrative Source
+
+Slides.com was the migration seed; this deck is now the narrative source.
