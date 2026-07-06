@@ -1284,7 +1284,8 @@ Concept:
 
 - `input_method("item_picker", ...)` creates a richer picker for menu items.
 - Each item can carry display fields like `title`, `subtitle`, and `image_url`.
-- `value` is the value stored in `answer` when the user picks that item.
+- Widget submissions are structured: use `answer.data.value` for the stored value.
+- Use `answer.text` when you need the display text the user saw.
 
 Example:
 
@@ -1306,7 +1307,8 @@ dialog order do
   ask "What pizza would you like to order?",
     expecting: item_picker
 
-  say "We'll start preparing your #{answer}!"
+  order = [answer.data.value]
+  say "We'll start preparing your #{answer.text}!"
 end
 ```
 
@@ -1447,7 +1449,7 @@ Example:
 
 dialog ask_pickup_time do
   ask "When would you like to pick up your order?", expecting: @datetime
-  pickup_time = date_format(answer.pickup_time.value, "{D} {Mfull} at {h24}:{0m}")
+  pickup_time = date_format(answer.pickup_time, "{D} {Mfull} at {h24}:{0m}")
 
   dialog __unknown__ do
     say "That doesn't seem to be a valid date or time"
@@ -1479,7 +1481,7 @@ task calculate_price do
   total = 0
 
   repeat item in order do
-    pizza = first(@menu[title: item])
+    pizza = first(@menu[value: item])
     price = replace(pizza.subtitle, "$", "")
     total = total + number(price)
   end
@@ -1552,9 +1554,11 @@ Concept:
 Example:
 
 ```text
+@email entity(match: "[email]")
+
 dialog ask_email do
   ask "What is your email address?", expecting: @email
-  user.email = answer.email.value
+  user.email = answer.email
   remember user.email
 
   dialog __unknown__, do: say "That isn't a valid email address"
