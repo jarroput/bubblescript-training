@@ -1182,6 +1182,499 @@ end
 Lookup: botsi_platform/docs/docs/bubblescript/input.md
 </div>
 
-<!-- SECTION:DATA_LOGIC_TASKS -->
+---
+
+## Lists
+
+Concept:
+
+- Lists hold multiple values in order.
+- Use lists for menus, accepted answers, order lines, and other repeated data.
+- `repeat item in list do` is the common way to visit every item.
+
+Example:
+
+```text
+dialog order do
+  menu = ["Margherita", "Pepperoni", "Hawaii"]
+
+  say "We serve #{length(menu)} different pizzas:"
+
+  repeat item in menu do
+    say item
+  end
+
+  ask "What pizza would you like to order?", expecting: menu
+
+  say "We'll start preparing your #{answer}!"
+
+  dialog __unknown__, do: say "Sorry, we only serve #{join_and(menu)}..."
+end
+```
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/language.md
+</div>
+
+---
+
+## Lists Exercise
+
+Exercise:
+
+- Add `Marinara` to the `menu` list.
+- Change the copy from `different pizzas` to `house pizzas`.
+- Keep `expecting: menu`, so the validation follows the list automatically.
+
+Example target:
+
+```text
+menu = ["Margherita", "Pepperoni", "Hawaii", "Marinara"]
+```
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/statements.md
+</div>
+
+---
+
+## Maps And Global Constants
+
+Concept:
+
+- Maps group related fields, like a title and image URL for one menu item.
+- Global constants start with `@` and are reusable across dialogs and tasks.
+- `pluck(@menu, "title")` extracts one field from each map.
+
+Example:
+
+```text
+@base_url "https://storage.googleapis.com/botsquad-assets/workshop/"
+
+@menu [
+  %{title: "Pizza Margherita", image_url: @base_url + "pizza_marg.jpg"},
+  %{title: "Pizza Pepperoni", image_url: @base_url + "pizza_pep.jpg"},
+  %{title: "Pizza Hawaii", image_url: @base_url + "pizza_haw.jpg"}
+]
+
+@menu_titles pluck(@menu, "title")
+
+dialog order do
+  say "We serve #{length(@menu)} different pizzas:"
+
+  ask "What pizza would you like to order?",
+    quick_replies: @menu,
+    expecting: @menu_titles
+
+  say "We'll start preparing your #{answer}!"
+
+  dialog __unknown__, do: say "Sorry, we only serve #{join_and(@menu_titles)}..."
+end
+```
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/language.md
+</div>
+
+---
+
+## Item Picker
+
+Concept:
+
+- `input_method("item_picker", ...)` creates a richer picker for menu items.
+- Each item can carry display fields like `title`, `subtitle`, and `image_url`.
+- `value` is the value stored in `answer` when the user picks that item.
+
+Example:
+
+```text
+@base_url "https://storage.googleapis.com/botsquad-assets/workshop/"
+
+@menu [
+  %{value: "Margherita", title: "Pizza Margherita", image_url: @base_url + "pizza_marg.jpg", subtitle: "$5.95"},
+  %{value: "Pepperoni", title: "Pizza Pepperoni", image_url: @base_url + "pizza_pep.jpg", subtitle: "$6.95"},
+  %{value: "Hawaii", title: "Pizza Hawaii", image_url: @base_url + "pizza_haw.jpg", subtitle: "$7.95"}
+]
+
+dialog order do
+  item_picker = input_method("item_picker",
+    caption: "Please select",
+    mode: "single",
+    items: @menu)
+
+  ask "What pizza would you like to order?",
+    expecting: item_picker
+
+  say "We'll start preparing your #{answer}!"
+end
+```
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/input.md
+</div>
+
+---
+
+## UI Widgets
+
+Concept:
+
+- Input methods describe what the channel should render when asking the user.
+- Channel support differs, so treat widgets as capability-based UI.
+- Start with the simplest widget that makes the answer clear.
+
+Common widget capabilities:
+
+- List
+- Gallery/Card
+- Buttons
+- Text
+- Multi select
+- Form
+- Location picker
+- Numeric
+- Wait control
+- Closed control
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/input.md
+</div>
+
+---
+
+## Conditionals
+
+Concept:
+
+- Use `if` for one yes/no decision.
+- Use `branch` when several cases are easier to read as a table.
+- Always keep the fallback path explicit when the bot has to continue.
+
+Example:
+
+```text
+if length(order) > 0 do
+  say "Ok, we'll prepare your #{join_and(order)}"
+else
+  say "You didn't order anything"
+end
+```
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/statements.md
+</div>
+
+---
+
+## Conditionals With Branch
+
+Example:
+
+```text
+branch do
+  order == nil       -> say "You ordered nothing"
+  length(order) == 1 -> say "We'll prepare your pizza"
+  length(order) < 3  -> say "We'll prepare your pizzas"
+else
+  say "You ordered too many pizzas"
+end
+
+branch length(order) do
+  0 -> say "You've ordered nothing"
+  1 -> say "We'll prepare your pizza"
+  2 -> say "We'll prepare your pizzas"
+else
+  say "You ordered too many pizzas"
+end
+```
+
+Check yourself:
+
+- The first branch checks full expressions.
+- The second branch matches against `length(order)`.
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/statements.md
+</div>
+
+---
+
+## Guards
+
+Concept:
+
+- `when` guards choose a dialog variant before the dialog body runs.
+- Put the most specific guarded dialogs above the default dialog.
+- Guards are useful for order limits, missing data, and state-dependent flow.
+
+Example:
+
+```text
+dialog order_line when length(order) >= 5 do
+  say "You reached the maximum order size..."
+end
+
+dialog order_line when length(order) == 0 do
+  ask "What pizza would you like to order?"
+  invoke order_line
+end
+
+dialog order_line do
+  ask "Do you want another pizza?"
+  invoke order_line
+end
+```
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/dialogs.md
+</div>
+
+---
+
+## Entities
+
+Concept:
+
+- Entities extract structured values from natural language.
+- `entity(match: "[time=pickup_time]")` asks for a time and stores the matched value under `pickup_time`.
+- Use the structured value for formatting, calculations, and validation.
+
+Example:
+
+```text
+@datetime entity(match: "[time=pickup_time]")
+
+dialog ask_pickup_time do
+  ask "When would you like to pick up your order?", expecting: @datetime
+  pickup_time = date_format(answer.pickup_time.value, "{D} {Mfull} at {h24}:{0m}")
+
+  dialog __unknown__ do
+    say "That doesn't seem to be a valid date or time"
+  end
+end
+```
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/entities.md
+</div>
+
+---
+
+## Tasks
+
+Concept:
+
+- `perform` runs a `task`.
+- Tasks are good for calculations, side effects, and reusable workflow steps.
+- Variables set in a task can be used after `perform` completes.
+
+Example:
+
+```text
+perform calculate_price
+say "The total price is $ #{total}"
+
+task calculate_price do
+  total = 0
+
+  repeat item in order do
+    pizza = first(@menu[title: item])
+    price = replace(pizza.subtitle, "$", "")
+    total = total + number(price)
+  end
+end
+```
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/tasks.md
+</div>
+
+---
+
+## CMS
+
+Concept:
+
+- Content can live outside the dialog when the same data is reused often.
+- A CMS or content file can expose constants like `@menu`.
+- Dialogs can stay focused on conversation flow instead of data entry.
+
+Example:
+
+```text
+dialog main do
+  repeat item in @menu do
+    say item.title
+  end
+end
+```
+
+<div class="lookup">
+Lookup: Studio content and CMS documentation
+</div>
+
+---
+
+## Intent YAML
+
+Concept:
+
+- Intent YAML keeps training utterances close to the intent they teach.
+- Use it for reusable intents like `about`, opening hours, or support questions.
+- Keep utterances realistic: short phrases people might actually type.
+
+Compact example:
+
+```text
+intents:
+  about:
+    utterances:
+      - what is Restaurant Sienna
+      - tell me about this restaurant
+      - who are you
+```
+
+<div class="lookup">
+Lookup: Studio intent and NLP documentation
+</div>
+
+---
+
+## User Data
+
+Concept:
+
+- `user` stores data about the current user.
+- `remember` persists a value so it is available in later conversations.
+- Only remember data the bot should actually reuse.
+
+Example:
+
+```text
+dialog ask_email do
+  ask "What is your email address?", expecting: @email
+  user.email = answer.email.value
+  remember user.email
+
+  dialog __unknown__, do: say "That isn't a valid email address"
+end
+```
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/user-data.md
+</div>
+
+---
+
+## Tagging
+
+Concept:
+
+- Tags mark that something important happened.
+- They are useful for analytics, segmentation, and follow-up automation.
+- Place tags after the action they represent has succeeded.
+
+Example:
+
+```text
+dialog confirm do
+  perform calculate_price
+  say "The total price is $ #{total}"
+  say "We will prepare your order for #{pickup_time}"
+  perform send_order
+  tag "ordered"
+end
+```
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/statements.md
+</div>
+
+---
+
+## Mail
+
+Concept:
+
+- A task can send an email after the order is confirmed.
+- Build the message from the order, total, and pickup time.
+- Keep mail tasks small so they are easy to replace with another integration later.
+
+Example:
+
+```text
+task send_order do
+  summary = "
+  You ordered:\n - #{join(order, "\n - ")}\n
+  Total price: #{total}\n
+  Please pickup at #{pickup_time}"
+
+  mail user.email, "Order Confirmation", summary
+end
+```
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/tasks.md
+</div>
+
+---
+
+## PWA Settings
+
+Concept:
+
+- PWA settings control how the bot appears when installed as an app.
+- Keep configuration short and brand-specific.
+- This is platform configuration, not conversation logic.
+
+Compact example:
+
+```text
+manifest:
+  background_color: "#f0f0f0"
+  display: standalone
+  orientation: portrait
+  theme_color: "#990000"
+splash_screen:
+  title: Restaurant Sienna
+  description: Order your pizzas
+  call_to_action: Start
+appearance: app
+```
+
+<div class="lookup">
+Lookup: Studio PWA settings
+</div>
+
+---
+
+## Variables
+
+Concept:
+
+- Variables can hold strings, integers, lists, maps, and structured answers.
+- Name variables after the thing they represent.
+- Reassign only when the new value is still the same concept.
+
+Example:
+
+```text
+# string
+v = "This is a string"
+say v
+
+# integer
+v = 10
+say v
+
+# list
+v = ["a", "b"]
+say first(v)
+```
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/language.md
+</div>
 
 <!-- SECTION:LOOKUP_AND_CLOSE -->
