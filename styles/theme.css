@@ -1,0 +1,32 @@
+:root {
+  --dx-blue: #2563eb;
+  --dx-ink: #111827;
+  --dx-muted: #6b7280;
+  --dx-surface: #f8fafc;
+}
+
+.slidev-layout {
+  color: var(--dx-ink);
+}
+
+.chapter-label {
+  color: var(--dx-blue);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.exercise {
+  background: #eff6ff;
+  border-left: 0.35rem solid var(--dx-blue);
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+}
+
+.lookup {
+  background: var(--dx-surface);
+  border-radius: 0.5rem;
+  color: var(--dx-muted);
+  font-size: 0.9rem;
+  padding: 0.75rem 1rem;
+}
