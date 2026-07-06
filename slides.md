@@ -1284,7 +1284,7 @@ Concept:
 
 - `input_method("item_picker", ...)` creates a richer picker for menu items.
 - Each item can carry display fields like `title`, `subtitle`, and `image_url`.
-- Widget submissions are structured: use `answer.data.value` for the stored value.
+- Widget submissions are structured: use `answer.data` for the stored value.
 - Use `answer.text` when you need the display text the user saw.
 
 Example:
@@ -1307,7 +1307,7 @@ dialog order do
   ask "What pizza would you like to order?",
     expecting: item_picker
 
-  order = [answer.data.value]
+  order = [answer.data]
   say "We'll start preparing your #{answer.text}!"
 end
 ```
