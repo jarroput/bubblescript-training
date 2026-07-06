@@ -71,7 +71,7 @@ dialog __main__ do
   say "We serve traditional Italian pizzas."
 
   say "We are located at Joan Muyskenweg 22 in Amsterdam"
-  show location [4.91505839, 52.3326472]
+  show location [lat: 52.3326472, lon: 4.91505839]
 
   ask "What would you like to order?"
   say "We'll start preparing your #{answer}"
@@ -91,9 +91,9 @@ Lookup: botsi_platform/docs/docs/bubblescript/examples.md
 
 Exercise:
 
-- Change the welcome line to include the guest's name.
-- Add one extra `say` line before the order question.
-- Keep the final `close`.
+- Change the welcome copy.
+- Swap the restaurant image.
+- Adjust the goodbye message.
 
 Check yourself:
 
@@ -132,7 +132,7 @@ dialog __main__ do
   say "We serve traditional Italian pizzas."
 
   say "We are located at Joan Muyskenweg 22 in Amsterdam"
-  show location [4.91505839, 52.3326472]
+  show location [lat: 52.3326472, lon: 4.91505839]
 
   ask "What would you like to order?"
   say "We'll start preparing your #{answer}"
@@ -192,7 +192,7 @@ end
 
 dialog trigger: "location | address" do
   say "We are located at Joan Muyskenweg 22 in Amsterdam"
-  show location [4.91505839, 52.3326472]
+  show location [lat: 52.3326472, lon: 4.91505839]
 end
 
 dialog trigger: "order" do
@@ -333,11 +333,9 @@ Text model:
 1. __main__ starts.
 2. __main__ runs: invoke about.
 3. invoke about pushes about onto the dialog stack.
-4. about says the Restaurant Sienna description.
-5. about finishes and pops off the stack.
-6. Execution returns to __main__ after invoke about.
-7. prompt waits for user input.
-8. continue exits the prompt; close exits the conversation.
+4. about runs its statements.
+5. When about finishes, execution returns to the next line in __main__.
+6. Later, prompt uses the same idea of pausing and resuming conversation flow.
 ```
 
 <div class="lookup">
@@ -353,7 +351,7 @@ Exercise:
 - Create a named dialog `address`.
 - Invoke `address` from `__main__`.
 - Give `address` a trigger: `"location | address"`.
-- Keep the coordinates exactly: `[4.91505839, 52.3326472]`.
+- Keep the coordinates exactly: `[lat: 52.3326472, lon: 4.91505839]`.
 
 <div class="lookup">
 Lookup: botsi_platform/docs/docs/bubblescript/examples.md
