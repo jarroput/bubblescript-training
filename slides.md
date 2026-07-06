@@ -557,7 +557,630 @@ Exercise:
 Lookup: botsi_platform/docs/docs/bubblescript/conditionals.md
 </div>
 
-<!-- SECTION:MATCHING_AND_INPUT -->
+---
+
+## User Intent
+
+Concept:
+
+- An intent identifies what the user wants to do.
+- Intent classification maps messy user text to one clear bot action.
+- In Restaurant Sienna, "Tell me about the restaurant" should route to the about answer.
+- "Tell me about the weather" should not route to the restaurant answer.
+
+Example user text:
+
+```text
+i want to know the weather forecast for today
+```
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/bml.md
+</div>
+
+---
+
+## User Intent Exercise
+
+Exercise:
+
+- Write three user phrases that mean "about Restaurant Sienna".
+- Write one phrase that looks similar but should not match the restaurant.
+- Keep the phrases as full sentences, not only keywords.
+
+Check yourself:
+
+- Would a human classify each phrase the same way?
+- Is the intent about the user's goal, not the exact words?
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/match_engine.md
+</div>
+
+---
+
+## Intent Classification Challenge
+
+Concept:
+
+- Similar sentences can ask for different things.
+- Keyword-only matching is often too broad.
+- Use BML to describe the sentence shape you expect.
+
+Try to classify:
+
+```text
+Tell me about the restaurant
+Tell me about the weather
+Can you explain about the place sienna?
+```
+
+Goal:
+
+- Restaurant phrases should hit Restaurant Sienna.
+- Weather phrases should be ignored or handled elsewhere.
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/bml.md
+</div>
+
+---
+
+## Bubblescript Matching Language
+
+Concept:
+
+- BML is sentence-level matching for user messages.
+- It is like regular expressions for tokens and phrases.
+- `|` means "or".
+- `_` matches a short span of unrelated words.
+- Parentheses group alternatives.
+
+Example pattern:
+
+```text
+about _ (restaurant | sienna)
+```
+
+This matches:
+
+```text
+Tell me about the restaurant
+Can you explain about the place sienna?
+```
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/bml.md
+</div>
+
+---
+
+## Bubblescript Matching Language Exercise
+
+Exercise:
+
+- Start with `about _ (restaurant | sienna)`.
+- Add one extra Restaurant Sienna synonym, such as `place`.
+- Keep the weather example out of the match.
+
+Example target:
+
+```text
+about _ (restaurant | sienna | place)
+```
+
+Check yourself:
+
+- Does "Tell me about the weather" still fail to match?
+- Does "Tell me about the place sienna" still match?
+
+<div class="lookup">
+Lookup: https://bml.dialox.ai/
+</div>
+
+---
+
+## Intent Definition
+
+Concept:
+
+- `intent(match: [...])` gives a nameable intent to one or more BML patterns.
+- A dialog can trigger on that intent.
+- The dialog body remains normal Bubblescript.
+
+Example:
+
+```text
+dialog trigger: intent(match: ["about _ (restaurant | sienna)"]) do
+  say "We serve traditional Italian pizza's."
+end
+```
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/bml.md
+</div>
+
+---
+
+## Intent Definition Exercise
+
+Exercise:
+
+- Add a second match phrase for "tell me about sienna".
+- Keep both phrases inside the same `match` list.
+- Change the answer to mention traditional Italian pizzas.
+
+Starting point:
+
+```text
+dialog trigger: intent(match: ["about _ (restaurant | sienna)"]) do
+  say "We serve traditional Italian pizza's."
+end
+```
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/dialogs.md
+</div>
+
+---
+
+## Global Constants
+
+Concept:
+
+- Put reusable intents in global constants.
+- Constants start with `@`.
+- Triggered dialogs can use the constant instead of repeating the intent definition.
+
+Example:
+
+```text
+@about intent(
+         match: ["about _ (restaurant | sienna)"]
+       )
+
+dialog trigger: @about do
+  say "We serve traditional Italian pizza's."
+end
+```
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/bml.md
+</div>
+
+---
+
+## Global Constants Exercise
+
+Exercise:
+
+- Create `@weather` for weather questions.
+- Create `@about` for Restaurant Sienna questions.
+- Make sure restaurant and weather messages trigger different dialogs.
+
+Example target:
+
+```text
+@weather intent(match: ["weather | forecast"])
+@about   intent(match: ["about _ (restaurant | sienna)"])
+```
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/constants.md
+</div>
+
+---
+
+## Short Form Dialog Notation
+
+Concept:
+
+- Short-form dialogs keep routing code compact.
+- Use it when the triggered action is a single statement.
+- It reads well for intent-to-dialog routing.
+
+Example:
+
+```text
+@about intent(
+         match: ["about _ (restaurant | sienna)"]
+       )
+
+dialog trigger: @about, do: invoke about
+```
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/dialogs.md
+</div>
+
+---
+
+## Short Form Dialog Notation Exercise
+
+Exercise:
+
+- Convert a multi-line `dialog trigger: @about do` block to short form.
+- Use `invoke about`.
+- Leave the named `dialog about do` unchanged.
+
+Example target:
+
+```text
+dialog trigger: @about, do: invoke about
+```
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/statements.md
+</div>
+
+---
+
+## Intent, Trigger, Dialog Pattern
+
+Concept:
+
+- Define the intent once.
+- Route the trigger to a named dialog.
+- Keep the answer in the named dialog.
+- This separates matching from conversation content.
+
+Example:
+
+```text
+@about   intent(match: ["about _ (restaurant | sienna)"])
+@address intent(match: ["what _ (location | address)", "where be _ (you | restaurant)"])
+@order   intent(match: ["i _ order", "i _ buy"])
+@close   intent(match: ["bye | close | stop | goodbye | exit"])
+
+dialog trigger: @about, do: invoke about
+dialog trigger: @address, do: invoke address
+dialog trigger: @order, do: invoke order
+dialog trigger: @close, do: close
+
+dialog about do
+  say "We serve traditional Italian pizza's."
+end
+
+dialog address do
+  say "We are located at Joan Muyskenweg 22 in Amsterdam"
+end
+
+dialog order do
+  ask "What would you like to order?"
+  say "We'll start preparing your #{answer}"
+end
+```
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/dialogs.md
+</div>
+
+---
+
+## Intent, Trigger, Dialog Pattern Exercise
+
+Exercise:
+
+- Add `@hours` with phrases for opening hours.
+- Route `@hours` to `invoke hours`.
+- Add `dialog hours do` with one clear answer.
+
+Check yourself:
+
+- Is the intent definition at the top?
+- Is the trigger only routing?
+- Is the answer in the named dialog?
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/examples.md
+</div>
+
+---
+
+## Examples Of BML
+
+Concept:
+
+- BML can match exact words, alternatives, and short gaps.
+- Use `_` when the user may add small filler phrases.
+- Use alternatives when several words mean the same route.
+
+Weather examples:
+
+```text
+what _ be _ weather
+weather | forecast
+what _ forecast
+```
+
+Example utterances:
+
+```text
+What is the weather?
+What will the weather be today?
+Tell me the forecast
+```
+
+<div class="lookup">
+Lookup: https://bml.dialox.ai/
+</div>
+
+---
+
+## Examples Of BML Exercise
+
+Exercise:
+
+- Add one phrase for "menu".
+- Add one phrase for "book a table".
+- Do not make either phrase match "weather".
+
+Starting point:
+
+```text
+@menu intent(match: ["menu | card"])
+@booking intent(match: ["book _ table"])
+```
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/bml.md
+</div>
+
+---
+
+## Inner Dialog Labels
+
+Concept:
+
+- Inner dialogs can be shown as labeled choices inside a prompt.
+- Labels are useful when the channel supports buttons or menu-like options.
+- Each label can invoke the same named dialog used by text triggers.
+
+Example:
+
+```text
+dialog __main__ do
+  prompt ["What can I do for you today?", "What else can I do for you?"]
+
+  dialog label: "About", do: invoke about
+  dialog label: "Location", do: invoke address
+  dialog label: "Order", do: invoke order
+  dialog label: "Nothing", do: invoke close
+end
+```
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/dialogs.md
+</div>
+
+---
+
+## Inner Dialog Labels Exercise
+
+Exercise:
+
+- Add a `Menu` label that invokes `menu`.
+- Add a matching named `dialog menu do`.
+- Keep the label short enough for a button.
+
+Example target:
+
+```text
+dialog label: "Menu", do: invoke menu
+```
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/input.md
+</div>
+
+---
+
+## Quick Replies
+
+Concept:
+
+- `quick_replies:` suggests visible answer buttons.
+- The user can still type something else.
+- Use quick replies when you want to guide input without hard validation.
+
+Example:
+
+```text
+dialog order do
+  say "Let's take your order..."
+
+  ask "What pizza would you like to order?",
+    quick_replies: ["Margherita", "Pepperoni", "Hawaii"]
+
+  say "We'll start preparing your #{answer}!"
+end
+```
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/input.md
+</div>
+
+---
+
+## Quick Replies Exercise
+
+Exercise:
+
+- Add `Quattro Formaggi` to the quick replies.
+- Keep the question text unchanged.
+- Type an answer that is not shown as a quick reply and observe that it can still continue.
+
+Example target:
+
+```text
+quick_replies: ["Margherita", "Pepperoni", "Hawaii", "Quattro Formaggi"]
+```
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/statements.md
+</div>
+
+---
+
+## Expecting
+
+Concept:
+
+- `expecting:` validates or classifies the answer to an `ask`.
+- With a list of strings, only those matches are accepted.
+- Use it when the bot needs one of a controlled set of answers.
+
+Example:
+
+```text
+dialog order do
+  say "Let's take your order..."
+
+  ask "What pizza would you like to order?",
+    expecting: ["Margherita", "Pepperoni", "Hawaii"]
+
+  say "We'll start preparing your #{answer}!"
+end
+```
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/input.md
+</div>
+
+---
+
+## Expecting Exercise
+
+Exercise:
+
+- Add `Marinara` to the accepted pizza list.
+- Try `Pasta` and confirm it is not accepted by the list.
+- Keep the confirmation line using `#{answer}`.
+
+Example target:
+
+```text
+expecting: ["Margherita", "Pepperoni", "Hawaii", "Marinara"]
+```
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/bml.md
+</div>
+
+---
+
+## Inner Dialog Triggers
+
+Concept:
+
+- Inner triggers belong to the surrounding dialog.
+- They handle special answers while the bot is inside that dialog.
+- Use `dialog __unknown__` inside the dialog for local fallback copy.
+
+Example:
+
+```text
+dialog order do
+  say "Let's take your order..."
+
+  ask "What pizza would you like to order?",
+    expecting: ["Margherita", "Pepperoni", "Hawaii"]
+
+  say "We'll start preparing your #{answer}!"
+
+  dialog trigger: "caprese" do
+    say "The Caprese Pizza is out of order"
+  end
+
+  dialog trigger: "pasta" do
+    say "We don't serve pasta's, only pizza's"
+  end
+
+  dialog __unknown__ do
+    say "Sorry, that is not on our menu..."
+  end
+end
+```
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/dialogs.md
+</div>
+
+---
+
+## Inner Dialog Triggers Exercise
+
+Exercise:
+
+- Add an inner trigger for `calzone`.
+- Make it say that calzone is only available at lunch.
+- Add or improve the inner `__unknown__` fallback.
+
+Check yourself:
+
+- Does the fallback talk about the pizza menu, not the whole bot?
+- Are these triggers inside `dialog order do`?
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/input.md
+</div>
+
+---
+
+## __returning__
+
+Concept:
+
+- `__returning__` runs when control returns to a dialog.
+- It is useful after a nested triggered dialog handled a side case.
+- Keep it short: remind the user what they were doing.
+
+Example:
+
+```text
+dialog order do
+  say "Let's take your order..."
+
+  ask "What pizza would you like to order?",
+    expecting: ["Margherita", "Pepperoni", "Hawaii"]
+
+  say "We'll start preparing your #{answer}!"
+
+  dialog trigger: "caprese", do: say "The Caprese Pizza is out of order"
+  dialog trigger: "pasta"  , do: say "We don't serve pasta's, only pizza's"
+  dialog __unknown__       , do: say "Sorry, that is not on our menu..."
+
+  dialog __returning__ do
+    say "Let's continue with your order..."
+  end
+end
+```
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/dialogs.md
+</div>
+
+---
+
+## __returning__ Exercise
+
+Exercise:
+
+- Add a `__returning__` dialog to the order flow.
+- Make it remind the guest to choose a pizza.
+- Keep the message shorter than one sentence.
+
+Example target:
+
+```text
+dialog __returning__ do
+  say "Back to your pizza order..."
+end
+```
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/input.md
+</div>
 
 <!-- SECTION:DATA_LOGIC_TASKS -->
 
