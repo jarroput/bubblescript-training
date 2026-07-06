@@ -36,6 +36,14 @@ Export the deck:
 npm run export
 ```
 
+## Editing The Deck
+
+Edit slide content in `slides.md`; keep Bubblescript examples embedded there for now so the workshop narrative stays easy to review.
+
+Put static images and media in `public/`. Use `styles/theme.css` for shared deck styling.
+
+Add reusable Slidev/Vue components to `components/` only when they reduce repeated markup or make a slide clearer.
+
 ## Maintenance Rule
 
 The original Slides.com workshop is only the migration seed. After the initial port, this Slidev deck is the maintained narrative source.
