@@ -1,0 +1,1609 @@
+[
+  {
+    "blocks": [
+      {
+        "type": "image",
+        "top": 72,
+        "left": 509.072,
+        "src": "bubblescript-basic-training/c427a2c37ff3eb35ca2dbd2c29e1ab42.png",
+        "alt": "image-0d186c"
+      },
+      {
+        "type": "text",
+        "top": 248,
+        "left": 237,
+        "markdown": "# Bubblescript\n\nAcademy"
+      }
+    ]
+  },
+  {
+    "id": "say-ask-show",
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Say, ask & show"
+      },
+      {
+        "type": "code",
+        "top": 144,
+        "left": 80,
+        "lang": "text",
+        "code": "dialog __main__ do\n  say \"Welcome at Restaurant Sienna 👋\"\n  show image \"restaurant.jpg\"\n  say \"We serve traditional Italian pizza's.\"\n  \n  say \"We are located at Joan Muyskenweg 22 in Amsterdam\"\n  show location [4.91505839, 52.3326472]\n  \n  ask \"What would you like to order?\"\n  say \"We'll start preparing your #{answer}\"\n  \n  say \"Goodbye\"\n  close\nend"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "iframe",
+        "top": 72,
+        "left": 81,
+        "src": "https://bubblescript.org/s/0VSFIi83AWe4uzErFB5R-O1YQMo"
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 81,
+        "markdown": "[https://developer.dialox.ai/bubblescript/getting_started/](https://developer.dialox.ai/bubblescript/getting_started/)"
+      }
+    ]
+  },
+  {
+    "id": "triggers",
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Dialogs and triggers"
+      },
+      {
+        "type": "code",
+        "top": 69,
+        "left": 50.5,
+        "lang": "text",
+        "code": "dialog __main__ do\n  say \"Welcome at Restaurant Sienna 👋\"\n  show image \"https://storage.googleapis.com/botsquad-assets/workshop/restaurant.jpg\"\n  say \"What can I do for you?\"\nend\n\ndialog trigger: \"about\" do\n  say \"We serve traditional Italian pizza's.\"\nend\n\ndialog trigger: \"location | address\" do\n  say \"We are located at Joan Muyskenweg 22 in Amsterdam\"\n  show location [4.91505839, 52.3326472]\nend\n\ndialog trigger: \"order\" do\n  ask \"What would you like to order?\"\n  say \"We'll start preparing your #{answer}\"\nend\n\ndialog trigger: \"stop | close | bye\" do\n  say \"Goodbye!\"\n  close\nend",
+        "lineNumbers": "1-5|7,11,16,21"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "iframe",
+        "top": 72,
+        "left": 80,
+        "src": "https://bubblescript.org/s/Gj9C9C0394kAGFRssPhlHfv88hs"
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 81,
+        "markdown": "[https://developer.dialox.ai/bubblescript/bml/](https://developer.dialox.ai/bubblescript/bml/)"
+      }
+    ]
+  },
+  {
+    "id": "prompting-and-fallback",
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Special dialog triggers"
+      },
+      {
+        "type": "code",
+        "top": 124,
+        "left": 175,
+        "lang": "text",
+        "code": "# same as main\ndialog __main__ do\n  say \"Hi!\"\nend\n\n# fires when there are no more dialogs left to execute\ndialog __root__ do\n  say \"What can I do for you?\"\nend\n\n# fires when a user message isn't triggering anything else\ndialog __unknown__ do\n  say \"I don't understand\"  \nend\n\n# triggers when a close statement is fired\ndialog __closed__ do\n  say \"Goodbye!\"\nend\n",
+        "lineNumbers": "2|7|12|17"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "iframe",
+        "top": 72,
+        "left": 80,
+        "src": "https://bubblescript.org/s/lK9U2H6CPt8Wmspf50h7tt3I6a4"
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 81,
+        "markdown": "[https://developer.dialox.ai/bubblescript/dialogs/](https://developer.dialox.ai/bubblescript/dialogs/)"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Invoke a named dialog"
+      },
+      {
+        "type": "code",
+        "top": 138,
+        "left": 214,
+        "lang": "text",
+        "code": "dialog __main__ do\n  say \"Welcome at Restaurant Sienna 👋\"\n  invoke about\n  show image \"restaurant.jpg\"\nend\n\ndialog __root__ do\n  say \"What can I do for you?\"\nend\n\ndialog trigger: \"about\" do\n  invoke about\nend\n\ndialog about do\n  say \"We serve traditional Italian pizza's.\"\nend",
+        "lineNumbers": "3,11,15"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Named dialog with trigger"
+      },
+      {
+        "type": "code",
+        "top": 200,
+        "left": 210,
+        "lang": "text",
+        "code": "dialog __main__ do\n  say \"Welcome at Restaurant Sienna 👋\"\n  invoke about\n  show image \"restaurant.jpg\"\nend\n\ndialog __root__ do\n  say \"What can I do for you?\"\nend\n\ndialog about, trigger: \"about\" do\n  say \"We serve traditional Italian pizza's.\"\nend",
+        "lineNumbers": "3,11|"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 56.5,
+        "left": 364,
+        "markdown": "dialog.stack"
+      },
+      {
+        "type": "image",
+        "top": 292.332,
+        "left": 335,
+        "src": "bubblescript-basic-training/80eac3f6cef4760e748a6dbf6b67d944.png",
+        "alt": "image-a027ec"
+      },
+      {
+        "type": "image",
+        "top": 292.332,
+        "left": 802.967,
+        "src": "bubblescript-basic-training/c29496d185286aa229aa0389d9928f23.png",
+        "alt": "image-48e872"
+      },
+      {
+        "type": "image",
+        "top": 292.332,
+        "left": 1040,
+        "src": "bubblescript-basic-training/17accae7e757d631de9e9ef038f210de.png",
+        "alt": "image-8a89c2"
+      },
+      {
+        "type": "image",
+        "top": 293.967,
+        "left": 100,
+        "src": "bubblescript-basic-training/ef2abd8f8c016583f86dcafc876c39a0.png",
+        "alt": "image-dc05ae"
+      },
+      {
+        "type": "image",
+        "top": 293.967,
+        "left": 570,
+        "src": "bubblescript-basic-training/9b904ef35e88bd861bc1e1ebd430e517.png",
+        "alt": "image-2de0cb"
+      },
+      {
+        "type": "text",
+        "top": 511.5,
+        "left": 100,
+        "markdown": "__main__"
+      },
+      {
+        "type": "text",
+        "top": 511.5,
+        "left": 335,
+        "markdown": "__main__"
+      },
+      {
+        "type": "text",
+        "top": 511.5,
+        "left": 570,
+        "markdown": "__main__"
+      },
+      {
+        "type": "text",
+        "top": 511.5,
+        "left": 805,
+        "markdown": "__root__"
+      },
+      {
+        "type": "text",
+        "top": 511.5,
+        "left": 1041.23,
+        "markdown": "order"
+      },
+      {
+        "type": "text",
+        "top": 630.5,
+        "left": 335,
+        "markdown": "about"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Prompt … Continue"
+      },
+      {
+        "type": "code",
+        "top": 138,
+        "left": 214,
+        "lang": "text",
+        "code": "dialog __main__ do\n  say \"Welcome at Restaurant Sienna 👋\"\n  \n  # keeps on prompting until continue or close\n  prompt \"What can I do for you?\" \n  \n  say \"Goodbye\"\n  close\nend\n\ndialog trigger: \"nothing | stop | bye | close\" do\n  continue # will continue on line 7\nend\n\ndialog __unknown__ do\n  say \"I don't understand\"\nend\n",
+        "lineNumbers": "5,12"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Reprompting"
+      },
+      {
+        "type": "code",
+        "top": 70,
+        "left": 223,
+        "lang": "text",
+        "code": "dialog __main__ do\n  say \"Welcome at Restaurant Sienna 👋\"\n  \n  # keeps on prompting until continue or close\n  prompt [\n    \"What can I do for you today?\", \n    \"What else can I do for you?\"\n  ] \n  \n  say \"Goodbye\"\n  close\nend\n\ndialog trigger: \"nothing | stop | bye | close\" do\n  continue # will continue on line 5\nend\n\ndialog __unknown__ do\n  say \"I don't understand\"\nend\n",
+        "lineNumbers": "5,6,7,8"
+      },
+      {
+        "type": "image",
+        "top": 214.418,
+        "left": 819.001,
+        "src": "bubblescript-basic-training/985679588e7a99b5b02f2ad4958a4a8b.png",
+        "alt": "image-c94583"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Prompt … Continue"
+      },
+      {
+        "type": "iframe",
+        "top": 84,
+        "left": 80.5,
+        "src": "https://bubblescript.org/s/IW7jTepcT48q_9wxBbkHViI5F-s"
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 81,
+        "markdown": "[https://developer.dialox.ai/bubblescript/statements/#prompt](https://developer.dialox.ai/bubblescript/dialogs/)"
+      }
+    ]
+  },
+  {
+    "id": "humanized-behavior",
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Random"
+      },
+      {
+        "type": "code",
+        "top": 137,
+        "left": 320,
+        "lang": "text",
+        "code": "dialog __main__ do\n  random do\n    say \"Hi there\"\n    say \"Hello\"\n    say \"Welcome\"\n  end\nend\n",
+        "lineNumbers": "2-6"
+      },
+      {
+        "type": "text",
+        "top": 647,
+        "left": 80.5,
+        "markdown": "[https://developer.dialox.ai/bubblescript/statements/#random](https://developer.dialox.ai/bubblescript/statements/#random)"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Once … After …"
+      },
+      {
+        "type": "code",
+        "top": 134,
+        "left": 272.5,
+        "lang": "text",
+        "code": "dialog __unknown__ do\n  once do\n    say \"I don't understand\"  \n    say \"I still don't understand\"\n  after\n    say \"Sorry, I don't think this is working\"\n    close\n  end\nend\n",
+        "lineNumbers": "2-8"
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 81,
+        "markdown": "[https://developer.dialox.ai/bubblescript/statements/#once](https://developer.dialox.ai/bubblescript/statements/#once)"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "User Intent"
+      },
+      {
+        "type": "text",
+        "top": 195.5,
+        "left": 340,
+        "markdown": "is the identification and categorization of what a user intended or wanted\n\n\"i want to know the weather forecast for today\""
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Intent Classification challenges"
+      },
+      {
+        "type": "text",
+        "top": 195.5,
+        "left": 340,
+        "markdown": "\"Tell me about the restaurant\"\n\nvs\n\n\"Tell me about the weather\""
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Bubblescript Matching Language"
+      },
+      {
+        "type": "text",
+        "top": 195.5,
+        "left": 340,
+        "markdown": "[about _ (restaurant | sienna)](https://bml.botsquad.com/?input=Tell+me+about+the+restaurant&locale=en&query=about+_+%28restaurant+%7C+sienna%29)\n\nmatches\n\n\"Tell me about the restaurant\"\n\n\"Can you explain about the place sienna?\""
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 80.5,
+        "markdown": "[https://developer.dialox.ai/bubblescript/bml/](https://developer.dialox.ai/bubblescript/bml/)"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Intent definition using BML"
+      },
+      {
+        "type": "code",
+        "top": 146.5,
+        "left": 89,
+        "lang": "text",
+        "code": "dialog trigger: intent(match: [\"about _ (restaurant | sienna)\"]) do\n  say \"We serve traditional Italian pizza's.\"\nend"
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 81,
+        "markdown": "[https://developer.botsquad.com/bubblescript/builtins/#intentargs](https://developer.dialox.ai/bubblescript/statements/#invoke)"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Global constants"
+      },
+      {
+        "type": "code",
+        "top": 118,
+        "left": 198.5,
+        "lang": "text",
+        "code": "@about intent(\n         match: [\"about _ (restaurant | sienna)\"]\n       )\n\ndialog trigger: @about do\n  say \"We serve traditional Italian pizza's.\"\nend\n"
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 81,
+        "markdown": "[https://developer.botsquad.com/bubblescript/builtins/#intentargs](https://developer.dialox.ai/bubblescript/statements/#invoke)"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Short form dialog notation"
+      },
+      {
+        "type": "code",
+        "top": 200,
+        "left": 340,
+        "lang": "text",
+        "code": "dialog trigger: @about, do: invoke about"
+      },
+      {
+        "type": "text",
+        "top": 340.5,
+        "left": 340,
+        "markdown": "- comma (,) behind the dialog name\n\n\t- semicolon (:) behind the do\n\n\t- no end"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Intent, trigger, dialog pattern"
+      },
+      {
+        "type": "code",
+        "top": 72,
+        "left": 80,
+        "lang": "text",
+        "code": "@about   intent(match: [\"about _ (restaurant | sienna)\"])\n@address intent(match: [\"what _ (location | address\", \"where be _ ( you | restaurant)\"])\n@order   intent(match: [\"i _ order\", \"i _ buy\"])\n@close   intent(match: [\"bye | close | stop | goodbye | exit\"])\n\ndialog trigger: @about, do: invoke about\ndialog trigger: @address, do: invoke address\ndialog trigger: @order, do: invoke order\ndialog trigger: @close, do: close\n\ndialog about do\n  say \"We serve traditional Italian pizza's.\"\nend\n\ndialog address do\n  say \"We are located at Joan Muyskenweg 22 in Amsterdam\"\nend\n\ndialog order do\n  ask \"What would you like to order?\"\n  say \"We'll start preparing your #{answer}\"\nend",
+        "lineNumbers": "1-4|6-9|11,15,19"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Examples of BML"
+      },
+      {
+        "type": "text",
+        "top": 112.5,
+        "left": 465.5,
+        "markdown": "[\"rain | sun\"](https://bml.botsquad.com/?input=Will+it+rain+today%3F&locale=en&query=rain+%7C+sun)"
+      },
+      {
+        "type": "text",
+        "top": 166.5,
+        "left": 327,
+        "markdown": "will it rain?\n\nwill the sun shine?\n\ndo you see the sun?"
+      },
+      {
+        "type": "text",
+        "top": 353.5,
+        "left": 465.5,
+        "markdown": "[\"what _ be _ weather\"](https://bml.botsquad.com/?input=What+is+the+weather+today%3F&locale=en&query=what+_+be+_+weather)"
+      },
+      {
+        "type": "text",
+        "top": 407.5,
+        "left": 327,
+        "markdown": "what is the weather like today?\n\nwhat will be the weather?\n\nwhat is the weather tomorrow?"
+      },
+      {
+        "type": "text",
+        "top": 594.5,
+        "left": 327,
+        "markdown": "Text"
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 81,
+        "markdown": "[https://developer.botsquad.com/bubblescript/bml/](https://developer.dialox.ai/bubblescript/statements/#invoke)"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "iframe",
+        "top": 72,
+        "left": 80,
+        "src": "https://bubblescript.org/s/GGRVhz2qmf_4gFt9nZWZRH3Wv6E"
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 81,
+        "markdown": "[https://developer.dialox.ai/bubblescript/bml/#intents](https://developer.dialox.ai/bubblescript/bml/#intents)"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Inner dialog labels"
+      },
+      {
+        "type": "code",
+        "top": 144,
+        "left": 80,
+        "lang": "text",
+        "code": "dialog __main__ do\n  prompt [\"What can I do for you today?\", \"What else can I do for you?\"]\n  \n  dialog label: \"About️\", do: invoke about\n  dialog label: \"Location\", do: invoke address\n  dialog label: \"Order\", do: invoke order\n  dialog label: \"Nothing\", do: invoke close\nend\n",
+        "lineNumbers": "4-7"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "iframe",
+        "top": 72,
+        "left": 80,
+        "src": "https://bubblescript.org/s/t19sS9UyeeV9meONsu8Oc21m3M0"
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 81,
+        "markdown": "[https://developer.dialox.ai/bubblescript/statements/#prompt](https://developer.dialox.ai/bubblescript/statements/#prompt)"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Quick replies"
+      },
+      {
+        "type": "code",
+        "top": 144,
+        "left": 80,
+        "lang": "text",
+        "code": "dialog order do\n  say \"Let's take your order…\"\n  \n  ask \"What pizza would you like to order?\",\n    quick_replies: [\"Margherita\", \"Pepperoni\", \"Hawaii\"]\n    \n  say \"We'll start preparing your #{answer}!\"\nend",
+        "lineNumbers": "4-5"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "iframe",
+        "top": 72,
+        "left": 80,
+        "src": "https://bubblescript.org/s/I3r4ad_Kqp44g8Ys4mEinhK2RTY"
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 81,
+        "markdown": "[https://developer.dialox.ai/bubblescript/statements/#quick_replies](https://developer.dialox.ai/bubblescript/statements/#quick_replies)"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Expecting"
+      },
+      {
+        "type": "code",
+        "top": 144,
+        "left": 80,
+        "lang": "text",
+        "code": "dialog order do\n  say \"Let's take your order…\"\n  \n  ask \"What pizza would you like to order?\",\n    expecting: [\"Margherita\", \"Pepperoni\", \"Hawaii\"]\n    \n  say \"We'll start preparing your #{answer}!\"\nend ",
+        "lineNumbers": "4-5"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "iframe",
+        "top": 72,
+        "left": 81,
+        "src": "https://bubblescript.org/s/ic8xgySSQfzPYrMUyCZlwGvvmMg"
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 81,
+        "markdown": "[https://developer.dialox.ai/bubblescript/statements/#expecting](https://developer.dialox.ai/bubblescript/statements/#expecting)"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Inner dialog triggers"
+      },
+      {
+        "type": "code",
+        "top": 96,
+        "left": 75,
+        "lang": "text",
+        "code": "dialog order do\n  say \"Let's take your order…\"\n  \n  ask \"What pizza would you like to order?\",\n    expecting: [\"Margherita\", \"Pepperoni\", \"Hawaii\"]\n  \n  say \"We'll start preparing your #{answer}!\"\n  \n  dialog trigger: \"caprese\" do\n    say \"The Caprese Pizza is out of order\"\n  end\n  \n  dialog trigger: \"pasta\" do\n    say \"We don't serve pasta's, only pizza's\"\n  end\n  \n  dialog __unknown__ do\n    say \"Sorry, that is not on our menu…\"\n  end\nend  \n",
+        "lineNumbers": "9-19"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "iframe",
+        "top": 72,
+        "left": 80,
+        "src": "https://bubblescript.org/s/x5_4cxtuKtzTRz-8ZlqlvQ5zfBE"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "__returning__"
+      },
+      {
+        "type": "code",
+        "top": 144,
+        "left": 80,
+        "lang": "text",
+        "code": "dialog order do\n  say \"Let's take your order…\"\n  \n  ask \"What pizza would you like to order?\",\n    expecting: [\"Margherita\", \"Pepperoni\", \"Hawaii\"]\n  \n  say \"We'll start preparing your #{answer}!\"\n  \n  dialog trigger: \"caprese\", do: say \"The Caprese Pizza is out of order\"\n  dialog trigger: \"pasta\"  , do: say \"We don't serve pasta's, only pizza's\"\n  dialog __unknown__       , do: say \"Sorry, that is not on our menu…\"\n  \n  dialog __returning__ do\n    say \"Let's continue with your order…\"\n  end\nend  ",
+        "lineNumbers": "13-15"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "iframe",
+        "top": 72,
+        "left": 80,
+        "src": "https://bubblescript.org/s/bBqflB1YaHybdQLiZn2k0ik_bgE"
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 81,
+        "markdown": "[https://developer.dialox.ai/bubblescript/dialogs/#__returning__](https://developer.dialox.ai/bubblescript/dialogs/#__returning__)"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "List"
+      },
+      {
+        "type": "code",
+        "top": 144,
+        "left": 80,
+        "lang": "text",
+        "code": "dialog order do\n  menu = [\"Margherita\", \"Pepperoni\", \"Hawaii\"]\n  \n  say \"We serve #{length(menu)} different pizza's:\"\n  \n  repeat item in menu do\n    say item\n  end    \n  \n  ask \"What pizza would you like to order?\", expecting: menu\n  \n  say \"We'll start preparing your #{answer}!\"\n  \n  dialog __unknown__, do: say \"Sorry, we only serve #{join_and(menu)}…\"\nend  \n",
+        "lineNumbers": "2|4|6-8|10|14"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "iframe",
+        "top": 72,
+        "left": 80,
+        "src": "https://bubblescript.org/s/OhuFbPfPqQs8eWBEamqajUYd9Xk"
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 81,
+        "markdown": "[https://developer.dialox.ai/bubblescript/constants/#list](https://developer.dialox.ai/bubblescript/constants/#list)"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Maps & global constants"
+      },
+      {
+        "type": "code",
+        "top": 72,
+        "left": 80,
+        "lang": "text",
+        "code": "@base_url \"https://storage.googleapis.com/botsquad-assets/workshop/\"\n\n@menu [\n  %{title: \"Pizza Marherita\", image_url: @base_url + \"pizza_marg.jpg\"},\n  %{title: \"Pizza Pepperoni\", image_url: @base_url + \"pizza_pep.jpg\" },\n  %{title: \"Pizza Hawaii\"   , image_url: @base_url + \"pizza_haw.jpg\" }\n]\n\n@menu_titles pluck(@menu, \"title\")\n\ndialog order do\n  say \"We serve #{length(@menu)} different pizza's:\"\n  \n  ask \"What pizza would you like to order?\",\n    quick_replies: @menu, \n    expecting: @menu_titles \n  \n  say \"We'll start preparing your #{answer}!\"\n  \n  dialog __unknown__, do: say \"Sorry, we only serve #{join_and(@menu_titles)}…\"\nend  ",
+        "lineNumbers": "1|3-7|9|14-16,12"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "iframe",
+        "top": 72,
+        "left": 80,
+        "src": "https://bubblescript.org/s/V4fUCl2gCb8bV5VY2xWnHIl2f7c"
+      },
+      {
+        "type": "text",
+        "top": 647,
+        "left": 80,
+        "markdown": "[https://developer.dialox.ai/bubblescript/constants/#map](https://developer.dialox.ai/bubblescript/constants/#map)"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Web Widgets"
+      },
+      {
+        "type": "code",
+        "top": 67,
+        "left": 80,
+        "lang": "text",
+        "code": "@base_url \"https://storage.googleapis.com/botsquad-assets/workshop/\"\n\n@menu [\n  %{value: \"Margherita\", title: \"Pizza Margherita\", \n  \timage_url: @base_url + \"pizza_marg.jpg\", subtitle: \"$5.95\"},\n  %{value: \"Pepperoni\" , title: \"Pizza Pepperoni\" , \n  \timage_url: @base_url + \"pizza_pep.jpg\" , subtitle: \"$6,95\"},\n  %{value: \"Hawaii\"    , title: \"Pizza Hawaii\"    , \n  \timage_url: @base_url + \"pizza_haw.jpg\" , subtitle: \"$7.95\"}\n]\n\ndialog order do\n  item_picker = input_method(\"item_picker\", \n    caption: \"Please select\", \n    mode: \"single\", \n    items: @menu)\n    \n  ask \"What pizza would you like to order?\",\n    expecting: item_picker\n  \n  say \"We'll start preparing your #{answer}!\"\nend ",
+        "lineNumbers": "13-16|18-19"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "iframe",
+        "top": 72,
+        "left": 80,
+        "src": "https://bubblescript.org/s/XphFHY5RkfGQkSmcE-tpFG1e_hQ"
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 81,
+        "markdown": "[https://developer.dialox.ai/bubblescript/input/#input-method-reference](https://developer.dialox.ai/bubblescript/input/#input-method-reference)"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 38,
+        "left": 36.822,
+        "markdown": "UI Components (web & messenger)"
+      },
+      {
+        "type": "image",
+        "top": 272.2,
+        "left": 523.087,
+        "src": "bubblescript-basic-training/70595d12b96973c02d89c735b19f3b47.png",
+        "alt": "image-e79cd9"
+      },
+      {
+        "type": "image",
+        "top": 306,
+        "left": 82.367,
+        "src": "bubblescript-basic-training/b89c4aea772d0bbb645b2d599b5a619a.png",
+        "alt": "image-a35c4d"
+      },
+      {
+        "type": "text",
+        "top": 340.5,
+        "left": 340,
+        "markdown": "Text"
+      },
+      {
+        "type": "image",
+        "top": 378,
+        "left": 931.765,
+        "src": "bubblescript-basic-training/ca1cecc138bda96c33b2950374f15517.png",
+        "alt": "image-037ab9"
+      },
+      {
+        "type": "text",
+        "top": 522,
+        "left": 82.367,
+        "markdown": "List"
+      },
+      {
+        "type": "text",
+        "top": 522,
+        "left": 493.621,
+        "markdown": "Gallery / Card"
+      },
+      {
+        "type": "text",
+        "top": 522,
+        "left": 925.598,
+        "markdown": "Buttons"
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 81,
+        "markdown": "[https://developer.dialox.ai/bubblescript/ui/](https://developer.dialox.ai/bubblescript/ui/)"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 36,
+        "left": 36.822,
+        "markdown": "Web Widgets (alternative keyboard)"
+      },
+      {
+        "type": "image",
+        "top": 151.6,
+        "left": 538.245,
+        "src": "bubblescript-basic-training/d0d008ba4c6b78201ef9291ff78be869.png",
+        "alt": "image-d3746e"
+      },
+      {
+        "type": "image",
+        "top": 221.6,
+        "left": 79.0175,
+        "src": "bubblescript-basic-training/99309e5fa135d9cb6a5a49c63d1922ef.png",
+        "alt": "image-381e04"
+      },
+      {
+        "type": "image",
+        "top": 221.6,
+        "left": 960,
+        "src": "bubblescript-basic-training/856ec308711d1d230f2fb8d72807483f.png",
+        "alt": "image-e37741"
+      },
+      {
+        "type": "text",
+        "top": 390.4,
+        "left": 80.9825,
+        "markdown": "Multi select"
+      },
+      {
+        "type": "text",
+        "top": 390.4,
+        "left": 538.442,
+        "markdown": "Form"
+      },
+      {
+        "type": "text",
+        "top": 390.4,
+        "left": 914.927,
+        "markdown": "Location picker"
+      },
+      {
+        "type": "image",
+        "top": 445.8,
+        "left": 538.442,
+        "src": "bubblescript-basic-training/b8611a216cbcb82e64f90e968f7ebf23.png",
+        "alt": "image-e18189"
+      },
+      {
+        "type": "image",
+        "top": 469.1,
+        "left": 897.77,
+        "src": "bubblescript-basic-training/8d3f6601475aa6bca636246701652b46.png",
+        "alt": "image-7622d1"
+      },
+      {
+        "type": "image",
+        "top": 493,
+        "left": 84.563,
+        "src": "bubblescript-basic-training/26fe00edaecc7117547696e27f57e471.png",
+        "alt": "image-ccc485"
+      },
+      {
+        "type": "text",
+        "top": 660.9,
+        "left": 914.927,
+        "markdown": "Closed control"
+      },
+      {
+        "type": "text",
+        "top": 661.8,
+        "left": 80.9825,
+        "markdown": "Numeric"
+      },
+      {
+        "type": "text",
+        "top": 661.8,
+        "left": 525.116,
+        "markdown": "Wait control"
+      },
+      {
+        "type": "text",
+        "top": 681,
+        "left": 81,
+        "markdown": "[https://developer.dialox.ai/bubblescript/input/](https://developer.dialox.ai/bubblescript/input/)"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Conditionals"
+      },
+      {
+        "type": "code",
+        "top": 80,
+        "left": 82,
+        "lang": "text",
+        "code": "  if length(order) > 0 do\n    say \"Ok, we'll prepare your #{join_and(order)}\"\n  else\n    say \"You didn't order anything\"\n  end  \n\n  branch do\n    order == nil       -> say \"You ordered nothing\"\n    length(order) == 1 -> say \"We'll prepare your product\"\n    length(order) < 3  -> say \"We'll prepare your products\"\n  else\n    say \"You ordered too many products\"\n  end\n\n  branch length(order) do\n    0 -> say \"You've ordered nothing\"\n    1 -> say \"We'll prepare your product\"\n    2 -> say \"We'll prepare your products\"\n  else\n    say \"You ordered too many products\"\n  end  ",
+        "lineNumbers": "1-5|7-13|15-21"
+      },
+      {
+        "type": "text",
+        "top": 681,
+        "left": 81,
+        "markdown": "[https://developer.dialox.ai/bubblescript/conditionals/](https://doc.botsquad.com/bubblescript/input/)"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "iframe",
+        "top": 72,
+        "left": 80,
+        "src": "https://bubblescript.org/s/yVQJ7CyVJm9SmTv_YI3BTr4-5pU"
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 81,
+        "markdown": "[https://developer.dialox.ai/bubblescript/conditionals/#if](https://developer.dialox.ai/bubblescript/conditionals/#if)"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Guards"
+      },
+      {
+        "type": "code",
+        "top": 144,
+        "left": 80,
+        "lang": "text",
+        "code": "dialog order_line when length(order) >= 5 do\n  say \"You reached the maximum order size…\"\nend\n\ndialog order_line when length(order) == 0 do\n  ask \"What pizza would you like to order?\"\n  invoke order_line\nend\n\ndialog order_line do\n  ask \"Do you want another pizza?\"\n  invoke order_line\nend",
+        "lineNumbers": "1,5,10"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "iframe",
+        "top": 72,
+        "left": 80,
+        "src": "https://bubblescript.org/s/vtGxaT7EMjxejtBuubJtoTbT-jo"
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 81,
+        "markdown": "[https://developer.dialox.ai/bubblescript/dialogs/#guard-clausesubblescript/bml/](https://developer.dialox.ai/bhttps://doc.botsquad.com/bubblescript/dialogs/#guard-clausesubblescript/bml/)"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Entities"
+      },
+      {
+        "type": "code",
+        "top": 144,
+        "left": 37,
+        "lang": "text",
+        "code": "@datetime entity(match: \"[time=pickup_time]\")\n\ndialog ask_pickup_time do\n  ask \"When would you like to pick-up your order?\", expecting: @datetime\n  pickup_time = date_format(answer.pickup_time.value, \"{D} {Mfull} at {h24}:{0m}\")\n  \n  dialog __unknown__ do\n    say \"That doesn't seem to be a valid date or time\"    \n  end\nend ",
+        "lineNumbers": "1|4|5"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "iframe",
+        "top": 72,
+        "left": 80,
+        "src": "https://bubblescript.org/s/PDHG_QwguEIqFQSCICJbDQfxaOA"
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 81,
+        "markdown": "[https://developer.dialox.ai/bubblescript/bml/#entities](https://developer.dialox.ai/bubblescript/bml/#entities)"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Tasks"
+      },
+      {
+        "type": "code",
+        "top": 144,
+        "left": 80,
+        "lang": "text",
+        "code": "perform calculate_price\nsay \"The total price is $ #{total}\"\n\n\ntask calculate_price do\n  total = 0\n  \n  repeat item in order do\n    pizza = first(@menu[title: item])\n    price = replace(pizza.subtitle, \"$\", \"\")\n    total = total + number(price)\n  end\nend ",
+        "lineNumbers": "1|5-13|2"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "iframe",
+        "top": 69,
+        "left": 80,
+        "src": "https://bubblescript.org/s/OGMKq7JZ9gcEwNVTrxYxv--fFsQ"
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 81,
+        "markdown": "[https://developer.dialox.ai/bubblescript/statements/#task](https://developer.dialox.ai/bubblescript/statements/#task)"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Log in"
+      },
+      {
+        "type": "image",
+        "top": 93.6,
+        "left": 379.785,
+        "src": "bubblescript-basic-training/1993f2792a0dc2299629ccde456a6815.png",
+        "alt": "image-6d8f18"
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 81,
+        "markdown": "[https://studio.dialox.ai/](https://studio.dialox.ai/)"
+      }
+    ]
+  },
+  {
+    "id": "shape-mask-1-1601294207985",
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Clone example bot"
+      },
+      {
+        "type": "image",
+        "top": 93.6,
+        "left": 138.495,
+        "src": "bubblescript-basic-training/6eb2c36731434d8693449569e2c6af5c.png",
+        "alt": "image-24d210"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Script - files"
+      },
+      {
+        "type": "image",
+        "top": 125,
+        "left": 27.49,
+        "src": "bubblescript-basic-training/5bed3416b44d4c1674e0428816a10794.png",
+        "alt": "image-78a373"
+      },
+      {
+        "type": "image",
+        "top": 125,
+        "left": 997.654,
+        "src": "bubblescript-basic-training/f23ef928968fe7b9baf11db32270ddb8.png",
+        "alt": "image-229254"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Content files"
+      },
+      {
+        "type": "image",
+        "top": 97.278,
+        "left": 67.01,
+        "src": "bubblescript-basic-training/e0b82e436bfacbb5bda3d84fcb50e805.png",
+        "alt": "image-698382"
+      },
+      {
+        "type": "image",
+        "top": 97.278,
+        "left": 371.2,
+        "src": "bubblescript-basic-training/9a64fe3d5599e64b919859008bd18c19.png",
+        "alt": "image-f5c5f6"
+      },
+      {
+        "type": "code",
+        "top": 455.078,
+        "left": 460,
+        "lang": "text",
+        "code": "dialog main do\n  repeat item in @menu do\n    say item.title    \n  end\nend"
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 81,
+        "markdown": "[https://developer.dialox.ai/customize/cms/](https://developer.dialox.ai/customize/cms/)"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "CMS"
+      },
+      {
+        "type": "image",
+        "top": 72,
+        "left": 90.575,
+        "src": "bubblescript-basic-training/85fece44603afbe3a9a7fb6fa8062bc0.png",
+        "alt": "image-bd9947"
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 81,
+        "markdown": "[https://doc.botsquad.com/customize/cms/](https://doc.botsquad.com/customize/cms/)"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "json schema"
+      },
+      {
+        "type": "image",
+        "top": 72,
+        "left": 109.06,
+        "src": "bubblescript-basic-training/6d40c37b185b9ecee2806a8f3f9968f5.png",
+        "alt": "image-a4e2a6"
+      },
+      {
+        "type": "code",
+        "top": 72,
+        "left": 480,
+        "lang": "yaml",
+        "code": "type: form\nstorage:\n  type: script \n  script_title: menu\ntitle: Ordering menu\nicon: shopping-cart\ndescription: Configure your ordering menu\n\nform:\n  schema:\n    type: array\n    title: Answers\n    items:\n      type: object\n      properties:\n        value:      { type: string, title: Value }\n        title:      { type: string, title: Title of the dish }\n        image_url:  { type: string, title: Image URL }\n        subtitle:   { type: string, subtitle: Price }\n      required: [\"value\", \"title\", \"image_url\", \"subtitle\"]    \n  \n  ui_schema:\n    classNames: \"collapsible-array--field\"\n    items:\n      ui:field: collapsible_array\n      ui:options:\n        caption_template: '<b>{{title}}</b> <span class=right>{{subtitle}}</span>'\n      ui:layout:\n      - title:         { sm: 8 }\n        subtitle:      { sm: 4 }\n      - image_url:     { sm: 12 }\n      image_url:\n        ui:widget: image\n      value:\n        ui:field: auto_uuid\n      ui:order: [\"title\", \"image_url\", \"subtitle\"]",
+        "lineNumbers": "4|16-19|1-36"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Intents"
+      },
+      {
+        "type": "image",
+        "top": 93.6,
+        "left": 110.585,
+        "src": "bubblescript-basic-training/085f265427eb95b58f3333d68a19c20c.png",
+        "alt": "image-1a80c7"
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 81,
+        "markdown": "[https://doc.botsquad.com/platform/nlp/intents/](https://doc.botsquad.com/platform/nlp/intents/)"
+      }
+    ]
+  },
+  {
+    "id": "shape-mask-4-1601298016453",
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Intent training"
+      },
+      {
+        "type": "image",
+        "top": 115.2,
+        "left": 167.139,
+        "src": "bubblescript-basic-training/9bf9786e240d6f04d2d404da40597fcf.png",
+        "alt": "image-74d647"
+      },
+      {
+        "type": "image",
+        "top": 115.2,
+        "left": 720,
+        "src": "bubblescript-basic-training/8f0211d3cbc67dbdb50b7bc2bd61b85e.png",
+        "alt": "image-ca09de"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "intents yaml"
+      },
+      {
+        "type": "code",
+        "top": 72,
+        "left": 227.5,
+        "lang": "yaml",
+        "code": "intents:\n  -\n    id: \"about\"\n    label:\n      $i18n: true\n      en: \"About\"\n    match: []\n    provider_agent: \"\"\n    provider_id: \"\"\n    provider_name: \"about\"\n    provider_type: \"qna\"\nutterances:\n  about:\n    negative:\n      $i18n: true\n      en:\n        - \"i don't want to know about you\"\n        - \"tell me about your personnel\"\n    positive:\n      $i18n: true\n      en:\n        - \"about restaurant sienna\"\n        - \"what type of restaurant is this\"\n        - \"what is this for restaurant\"\n        - \"what kind of restaurant is this\"\n        - \"what kind of restaurant is sienna\"\n        - \"information about the restaurant\"\n        - \"what can you tell me about restaurant sienna\"\n        - \"tell me about the restaurant\"\n        - \"i want information about the restaurant\""
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "User Data"
+      },
+      {
+        "type": "code",
+        "top": 91.5,
+        "left": 111,
+        "lang": "text",
+        "code": "dialog ask_email do\n  ask \"What is your email address?\", expecting: @email\n  user.email = answer.email.value\n  remember user.email\n  \n  dialog __unknown__, do: say \"That isn't a valid email address\"    \nend  ",
+        "lineNumbers": "4"
+      },
+      {
+        "type": "image",
+        "top": 329.008,
+        "left": 436.586,
+        "src": "bubblescript-basic-training/b609ad86e46adcd710394f013adef10c.png",
+        "alt": "image-c1b149"
+      },
+      {
+        "type": "image",
+        "top": 458.242,
+        "left": 80,
+        "src": "bubblescript-basic-training/3cbeedb898206f5a17e34a2414d90120.png",
+        "alt": "image-e57c37"
+      },
+      {
+        "type": "text",
+        "top": 675,
+        "left": 81,
+        "markdown": "[https://doc.botsquad.com/bubblescript/statements/#remember-forget](https://doc.botsquad.com/bubblescript/statements/#remember-forget)"
+      }
+    ]
+  },
+  {
+    "id": "shape-mask-7-1601306818342",
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Tagging"
+      },
+      {
+        "type": "image",
+        "top": 72,
+        "left": 102.4,
+        "src": "bubblescript-basic-training/cbe72258d78592dad8297d94f5e943c2.png",
+        "alt": "image-b8185f"
+      },
+      {
+        "type": "code",
+        "top": 412.25,
+        "left": 168,
+        "lang": "text",
+        "code": "dialog confirm do\n  perform calculate_price\n  say \"The total price is $ #{total}\"\n  say \"We will prepare your order for #{pickup_time}\"\n  perform send_order\n  tag \"ordered\"\nend ",
+        "lineNumbers": "6,10"
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 81,
+        "markdown": "[h](https://doc.botsquad.com/bubblescript/statements/#tag-untag)[ttps://doc.botsquad.com/bubblescript/statements/#tag-untag](https://doc.botsquad.com/bubblescript/statements/#tag-untag)"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Mail"
+      },
+      {
+        "type": "image",
+        "top": 72,
+        "left": 459.719,
+        "src": "bubblescript-basic-training/9e9b5fba99d45f0b7ff42c58205ebca3.png",
+        "alt": "image-4a1dac"
+      },
+      {
+        "type": "code",
+        "top": 425.5,
+        "left": 271,
+        "lang": "text",
+        "code": "task send_order do\n  summary = \"\n  You ordered:\\n - #{join(order, \"\\n - \")}\\n\n  Total price: #{total}\\n\n  Please pickup at #{pickup_time}\"\n  \n  mail user.email, \"Order Confirmation\", summary  \nend",
+        "lineNumbers": "7"
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 81,
+        "markdown": "[https://doc.botsquad.com/platform/communication/email/](https://doc.botsquad.com/platform/communication/email/)"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Connect (as PWA)"
+      },
+      {
+        "type": "image",
+        "top": 93.6,
+        "left": 139.25,
+        "src": "bubblescript-basic-training/17e8475c29d98222e6ee6d5359f0207c.png",
+        "alt": "image-27481f"
+      },
+      {
+        "type": "image",
+        "top": 377.125,
+        "left": 560,
+        "src": "bubblescript-basic-training/8d38f7fbd2719aee5241001d47729146.png",
+        "alt": "image-a08a31"
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 81,
+        "markdown": "[https://doc.botsquad.com/channel/web_pwa/](https://doc.botsquad.com/channel/web_pwa/)"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "PWA settings"
+      },
+      {
+        "type": "image",
+        "top": 72,
+        "left": 166.966,
+        "src": "bubblescript-basic-training/f9b1894c905bec7c0a5edfcf744b65ef.png",
+        "alt": "image-7b3937"
+      },
+      {
+        "type": "image",
+        "top": 187.2,
+        "left": 838.41,
+        "src": "bubblescript-basic-training/354c7588f143951ef266fb59a8a8bc9c.png",
+        "alt": "image-112351"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "PWA yaml"
+      },
+      {
+        "type": "image",
+        "top": 144,
+        "left": 81,
+        "src": "bubblescript-basic-training/284360730419d0036db548ae52db34c5.png",
+        "alt": "image-848c77"
+      },
+      {
+        "type": "code",
+        "top": 192.976,
+        "left": 400,
+        "lang": "yaml",
+        "code": "manifest:\n  background_color: '#f0f0f0'\n  display: standalone\n  orientation: portrait\n  theme_color: '#990000'\nsplash_screen:\n  title: Restaurant Sienna\n  description: Order your pizza's\n  call_to_action: Start\n  footer: 'I have read the <a target=\"_blank\" href=\"https://www.botsquad.com/terms\">terms and conditions</a>'\nappearance: app"
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 81,
+        "markdown": "[https://doc.botsquad.com/channel/web_pwa/](https://doc.botsquad.com/channel/web_pwa/)"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Variables"
+      },
+      {
+        "type": "text",
+        "top": 88.5,
+        "left": 0,
+        "markdown": "variable = value"
+      },
+      {
+        "type": "code",
+        "top": 211,
+        "left": 405,
+        "lang": "text",
+        "code": "# string\nv = \"This is a string\"\nsay v\n\n# integer\nv = 10\nsay v\n\n# list\nv = [\"a\", \"b\"] \nsay first(v)"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "String variables"
+      },
+      {
+        "type": "iframe",
+        "top": 72,
+        "left": 80,
+        "src": "https://bubblescript.org/s/OfiJFQyXUrh2583cUzaLl7mtbL8"
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 81,
+        "markdown": "[https://developer.dialox.ai/bubblescript/builtins/#string-functions](https://developer.dialox.ai/bubblescript/dialogs/)"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "Integer variables"
+      },
+      {
+        "type": "iframe",
+        "top": 72,
+        "left": 80,
+        "src": "https://bubblescript.org/s/UwhSILsUBPo0QauhYBAmBQguA_g"
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 81,
+        "markdown": "[https://developer.dialox.ai/bubblescript/builtins/#numeric-functions](https://developer.dialox.ai/bubblescript/dialogs/)"
+      }
+    ]
+  },
+  {
+    "blocks": [
+      {
+        "type": "text",
+        "top": 0,
+        "left": 340,
+        "markdown": "List variables"
+      },
+      {
+        "type": "iframe",
+        "top": 72,
+        "left": 80,
+        "src": "https://bubblescript.org/s/uC_-K9I6czfG57O0KMIyCEwCpwA"
+      },
+      {
+        "type": "text",
+        "top": 648,
+        "left": 81,
+        "markdown": "[https://developer.dialox.ai/bubblescript/builtins/#list-array-functions](https://developer.dialox.ai/bubblescript/dialogs/)"
+      }
+    ]
+  }
+]

@@ -36,6 +36,20 @@ Export the deck:
 npm run export
 ```
 
+Re-import from a Slides.com offline export:
+
+```bash
+npm run migrate:slidescom
+```
+
+Regenerate the Bubblescript Shiki grammar (after editing keywords in `scripts/generate-bubblescript-grammar.mjs`):
+
+```bash
+npm run generate:grammar
+```
+
+Set `SLIDESCOM_EXPORT` if the export folder is not in `~/Downloads/slides_bubblescript-basic-training (1)`.
+
 ## Editing The Deck
 
 Edit slide content in `slides.md`; keep Bubblescript examples embedded there for now so the workshop narrative stays easy to review.

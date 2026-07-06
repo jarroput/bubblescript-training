@@ -1,6 +1,7 @@
 ---
 theme: default
 title: Bubblescript Basics
+colorSchema: light
 info: |
   Half-day Bubblescript training for new DialoX users and solution consultants.
 css: unocss
@@ -13,7 +14,7 @@ css: unocss
 Read, write, and extend conversational bots in DialoX.
 
 <div class="lookup">
-Half-day workshop - Restaurant Sienna storyline - Concept, example, exercise, lookup
+Half-day workshop - Starbucks storyline - Concept, example, exercise, lookup
 </div>
 
 ---
@@ -45,7 +46,7 @@ By the end, you can:
 
 ---
 
-## First Restaurant Sienna Bot
+## First Starbucks Bot
 
 Concept:
 
@@ -60,15 +61,15 @@ Lookup: botsi_platform/docs/docs/bubblescript/getting_started.md
 
 ---
 
-## First Restaurant Sienna Bot Example
+## First Starbucks Bot Example
 
-Restaurant Sienna as one complete flow:
+Starbucks as one complete flow:
 
-```text
+```bubblescript
 dialog __main__ do
-  say "Welcome to Restaurant Sienna"
-  show image "restaurant.jpg"
-  say "We serve traditional Italian pizzas."
+  say "Welcome to Starbucks"
+  show image "starbucks.jpg"
+  say "We serve delicious coffees and pastries."
 
   say "We are located at Joan Muyskenweg 22 in Amsterdam"
   show location [lat: 52.3326472, lon: 4.91505839]
@@ -87,12 +88,12 @@ Lookup: botsi_platform/docs/docs/bubblescript/examples.md
 
 ---
 
-## First Restaurant Sienna Bot Exercise
+## First Starbucks Bot Exercise
 
 Exercise:
 
 - Change the welcome copy.
-- Swap the restaurant image.
+- Swap the coffee shop image.
 - Adjust the goodbye message.
 
 Check yourself:
@@ -123,13 +124,13 @@ Lookup: botsi_platform/docs/docs/bubblescript/statements.md
 
 ## Say, Ask, And Show Example
 
-Restaurant Sienna greeting, media, address, and order:
+Starbucks greeting, media, address, and order:
 
-```text
+```bubblescript
 dialog __main__ do
-  say "Welcome to Restaurant Sienna"
-  show image "https://storage.googleapis.com/botsquad-assets/workshop/restaurant.jpg"
-  say "We serve traditional Italian pizzas."
+  say "Welcome to Starbucks"
+  show image "https://storage.googleapis.com/botsquad-assets/workshop/starbucks.jpg"
+  say "We serve delicious coffees and pastries."
 
   say "We are located at Joan Muyskenweg 22 in Amsterdam"
   show location [lat: 52.3326472, lon: 4.91505839]
@@ -177,17 +178,17 @@ Lookup: botsi_platform/docs/docs/bubblescript/dialogs.md
 
 ## Dialogs And Triggers Example
 
-Split Restaurant Sienna into small triggered intents:
+Split Starbucks into small triggered intents:
 
-```text
+```bubblescript
 dialog __main__ do
-  say "Welcome to Restaurant Sienna"
-  show image "https://storage.googleapis.com/botsquad-assets/workshop/restaurant.jpg"
+  say "Welcome to Starbucks"
+  show image "https://storage.googleapis.com/botsquad-assets/workshop/starbucks.jpg"
   say "What can I do for you?"
 end
 
 dialog trigger: "about" do
-  say "We serve traditional Italian pizzas."
+  say "We serve delicious coffees and pastries."
 end
 
 dialog trigger: "location | address" do
@@ -217,7 +218,7 @@ Lookup: botsi_platform/docs/docs/bubblescript/bml.md
 Exercise:
 
 - Add a `menu | card` trigger.
-- Make it say that Restaurant Sienna serves pizza, pasta, and dessert.
+- Make it say that Starbucks serves coffee, tea, and dessert.
 - Add one trigger for opening hours.
 - Test the wording by sending short user messages, not full sentences.
 
@@ -244,9 +245,9 @@ Lookup: botsi_platform/docs/docs/bubblescript/dialogs.md
 
 ## Special Dialogs Example
 
-Restaurant Sienna fallback behavior:
+Starbucks fallback behavior:
 
-```text
+```bubblescript
 dialog __main__ do
   say "Hi!"
 end
@@ -274,7 +275,7 @@ Lookup: botsi_platform/docs/docs/bubblescript/dialogs.md
 
 Exercise:
 
-- Change `__root__` into a useful Restaurant Sienna menu prompt.
+- Change `__root__` into a useful Starbucks menu prompt.
 - Make `__unknown__` suggest examples: about, location, order, stop.
 - Keep `__closed__` short and final.
 
@@ -301,13 +302,13 @@ Lookup: botsi_platform/docs/docs/bubblescript/dialogs.md
 
 ## Invoke A Named Dialog Example
 
-Call the same Restaurant Sienna "about" answer from startup and from a trigger:
+Call the same Starbucks "about" answer from startup and from a trigger:
 
-```text
+```bubblescript
 dialog __main__ do
-  say "Welcome to Restaurant Sienna"
+  say "Welcome to Starbucks"
   invoke about
-  show image "restaurant.jpg"
+  show image "starbucks.jpg"
 end
 
 dialog __root__ do
@@ -315,7 +316,7 @@ dialog __root__ do
 end
 
 dialog about, trigger: "about" do
-  say "We serve traditional Italian pizzas."
+  say "We serve delicious coffees and pastries."
 end
 ```
 
@@ -329,7 +330,7 @@ Lookup: botsi_platform/docs/docs/bubblescript/statements.md
 
 Text model:
 
-```text
+```bubblescript
 1. __main__ starts.
 2. __main__ runs: invoke about.
 3. invoke about pushes about onto the dialog stack.
@@ -376,11 +377,11 @@ Lookup: botsi_platform/docs/docs/bubblescript/statements.md
 
 ## Prompt And Continue Example
 
-Keep Restaurant Sienna open until the guest is done:
+Keep Starbucks open until the guest is done:
 
-```text
+```bubblescript
 dialog __main__ do
-  say "Welcome to Restaurant Sienna"
+  say "Welcome to Starbucks"
 
   # keeps prompting until continue or close
   prompt "What can I do for you?"
@@ -408,9 +409,9 @@ Lookup: botsi_platform/docs/docs/bubblescript/input.md
 
 Use a text list when the second and later prompt should sound different:
 
-```text
+```bubblescript
 dialog __main__ do
-  say "Welcome to Restaurant Sienna"
+  say "Welcome to Starbucks"
 
   # keeps prompting until continue or close
   prompt [
@@ -469,14 +470,14 @@ Lookup: botsi_platform/docs/docs/bubblescript/statements.md
 
 ## Random Responses Example
 
-Vary the Restaurant Sienna welcome without changing the flow:
+Vary the Starbucks welcome without changing the flow:
 
-```text
+```bubblescript
 dialog __main__ do
   random do
     say "Hi there"
     say "Hello"
-    say "Welcome to Restaurant Sienna"
+    say "Welcome to Starbucks"
   end
 end
 ```
@@ -497,7 +498,7 @@ Exercise:
 
 Example target:
 
-```text
+```bubblescript
 say "We'll start preparing your #{answer}"
 ```
 
@@ -524,9 +525,9 @@ Lookup: botsi_platform/docs/docs/bubblescript/conditionals.md
 
 ## Once And After Example
 
-Escalate Restaurant Sienna's unknown-message handling:
+Escalate Starbucks's unknown-message handling:
 
-```text
+```bubblescript
 dialog __unknown__ do
   once do
     say "I don't understand"
@@ -565,12 +566,12 @@ Concept:
 
 - An intent identifies what the user wants to do.
 - Intent classification maps messy user text to one clear bot action.
-- In Restaurant Sienna, "Tell me about the restaurant" should route to the about answer.
-- "Tell me about the weather" should not route to the restaurant answer.
+- In Starbucks, "Tell me about the coffee shop" should route to the about answer.
+- "Tell me about the weather" should not route to the coffee shop answer.
 
 Example user text:
 
-```text
+```bubblescript
 i want to know the weather forecast for today
 ```
 
@@ -584,8 +585,8 @@ Lookup: botsi_platform/docs/docs/bubblescript/bml.md
 
 Exercise:
 
-- Write three user phrases that mean "about Restaurant Sienna".
-- Write one phrase that looks similar but should not match the restaurant.
+- Write three user phrases that mean "about Starbucks".
+- Write one phrase that looks similar but should not match the coffee shop.
 - Keep the phrases as full sentences, not only keywords.
 
 Check yourself:
@@ -609,15 +610,15 @@ Concept:
 
 Try to classify:
 
-```text
-Tell me about the restaurant
+```bubblescript
+Tell me about the coffee shop
 Tell me about the weather
-Can you explain about the place sienna?
+Can you explain about the place starbucks?
 ```
 
 Goal:
 
-- Restaurant phrases should hit Restaurant Sienna.
+- coffee shop phrases should hit Starbucks.
 - Weather phrases should be ignored or handled elsewhere.
 
 <div class="lookup">
@@ -638,15 +639,15 @@ Concept:
 
 Example pattern:
 
-```text
-about _ (restaurant | sienna)
+```bubblescript
+about _ (coffee shop | starbucks)
 ```
 
 This matches:
 
-```text
-Tell me about the restaurant
-Can you explain about the place sienna?
+```bubblescript
+Tell me about the coffee shop
+Can you explain about the place starbucks?
 ```
 
 <div class="lookup">
@@ -659,20 +660,20 @@ Lookup: botsi_platform/docs/docs/bubblescript/bml.md
 
 Exercise:
 
-- Start with `about _ (restaurant | sienna)`.
-- Add one extra Restaurant Sienna synonym, such as `place`.
+- Start with `about _ (coffee shop | starbucks)`.
+- Add one extra Starbucks synonym, such as `place`.
 - Keep the weather example out of the match.
 
 Example target:
 
-```text
-about _ (restaurant | sienna | place)
+```bubblescript
+about _ (coffee shop | starbucks | place)
 ```
 
 Check yourself:
 
 - Does "Tell me about the weather" still fail to match?
-- Does "Tell me about the place sienna" still match?
+- Does "Tell me about the place starbucks" still match?
 
 <div class="lookup">
 Lookup: https://bml.dialox.ai/
@@ -690,9 +691,9 @@ Concept:
 
 Example:
 
-```text
-dialog trigger: intent(match: ["about _ (restaurant | sienna)"]) do
-  say "We serve traditional Italian pizza's."
+```bubblescript
+dialog trigger: intent(match: ["about _ (coffee shop | starbucks)"]) do
+  say "We serve delicious coffees and pastries."
 end
 ```
 
@@ -706,15 +707,15 @@ Lookup: botsi_platform/docs/docs/bubblescript/bml.md
 
 Exercise:
 
-- Add a second match phrase for "tell me about sienna".
+- Add a second match phrase for "tell me about starbucks".
 - Keep both phrases inside the same `match` list.
-- Change the answer to mention traditional Italian pizzas.
+- Change the answer to mention delicious coffees and pastries.
 
 Starting point:
 
-```text
-dialog trigger: intent(match: ["about _ (restaurant | sienna)"]) do
-  say "We serve traditional Italian pizza's."
+```bubblescript
+dialog trigger: intent(match: ["about _ (coffee shop | starbucks)"]) do
+  say "We serve delicious coffees and pastries."
 end
 ```
 
@@ -734,13 +735,13 @@ Concept:
 
 Example:
 
-```text
+```bubblescript
 @about intent(
-         match: ["about _ (restaurant | sienna)"]
+         match: ["about _ (coffee shop | starbucks)"]
        )
 
 dialog trigger: @about do
-  say "We serve traditional Italian pizza's."
+  say "We serve delicious coffees and pastries."
 end
 ```
 
@@ -755,14 +756,14 @@ Lookup: botsi_platform/docs/docs/bubblescript/bml.md
 Exercise:
 
 - Create `@weather` for weather questions.
-- Create `@about` for Restaurant Sienna questions.
-- Make sure restaurant and weather messages trigger different dialogs.
+- Create `@about` for Starbucks questions.
+- Make sure coffee shop and weather messages trigger different dialogs.
 
 Example target:
 
-```text
+```bubblescript
 @weather intent(match: ["weather | forecast"])
-@about   intent(match: ["about _ (restaurant | sienna)"])
+@about   intent(match: ["about _ (coffee shop | starbucks)"])
 ```
 
 <div class="lookup">
@@ -781,9 +782,9 @@ Concept:
 
 Example:
 
-```text
+```bubblescript
 @about intent(
-         match: ["about _ (restaurant | sienna)"]
+         match: ["about _ (coffee shop | starbucks)"]
        )
 
 dialog trigger: @about, do: invoke about
@@ -805,7 +806,7 @@ Exercise:
 
 Example target:
 
-```text
+```bubblescript
 dialog trigger: @about, do: invoke about
 ```
 
@@ -826,9 +827,9 @@ Concept:
 
 Example:
 
-```text
-@about   intent(match: ["about _ (restaurant | sienna)"])
-@address intent(match: ["what _ (location | address)", "where be _ (you | restaurant)"])
+```bubblescript
+@about   intent(match: ["about _ (coffee shop | starbucks)"])
+@address intent(match: ["what _ (location | address)", "where be _ (you | coffee shop)"])
 @order   intent(match: ["i _ order", "i _ buy"])
 @close   intent(match: ["bye | close | stop | goodbye | exit"])
 
@@ -838,7 +839,7 @@ dialog trigger: @order, do: invoke order
 dialog trigger: @close, do: close
 
 dialog about do
-  say "We serve traditional Italian pizza's."
+  say "We serve delicious coffees and pastries."
 end
 
 dialog address do
@@ -887,7 +888,7 @@ Concept:
 
 Weather examples:
 
-```text
+```bubblescript
 what _ be _ weather
 weather | forecast
 what _ forecast
@@ -895,7 +896,7 @@ what _ forecast
 
 Example utterances:
 
-```text
+```bubblescript
 What is the weather?
 What will the weather be today?
 Tell me the forecast
@@ -917,7 +918,7 @@ Exercise:
 
 Starting point:
 
-```text
+```bubblescript
 @menu intent(match: ["menu | card"])
 @booking intent(match: ["book _ table"])
 ```
@@ -938,7 +939,7 @@ Concept:
 
 Example:
 
-```text
+```bubblescript
 dialog __main__ do
   prompt ["What can I do for you today?", "What else can I do for you?"]
 
@@ -965,7 +966,7 @@ Exercise:
 
 Example target:
 
-```text
+```bubblescript
 dialog label: "Menu", do: invoke menu
 ```
 
@@ -985,12 +986,12 @@ Concept:
 
 Example:
 
-```text
+```bubblescript
 dialog order do
   say "Let's take your order..."
 
-  ask "What pizza would you like to order?",
-    quick_replies: ["Margherita", "Pepperoni", "Hawaii"]
+  ask "What coffee would you like to order?",
+    quick_replies: ["Latte", "Cappuccino", "Frappuccino"]
 
   say "We'll start preparing your #{answer}!"
 end
@@ -1006,14 +1007,14 @@ Lookup: botsi_platform/docs/docs/bubblescript/input.md
 
 Exercise:
 
-- Add `Quattro Formaggi` to the quick replies.
+- Add `Macchiato` to the quick replies.
 - Keep the question text unchanged.
 - Type an answer that is not shown as a quick reply and observe that it can still continue.
 
 Example target:
 
-```text
-quick_replies: ["Margherita", "Pepperoni", "Hawaii", "Quattro Formaggi"]
+```bubblescript
+quick_replies: ["Latte", "Cappuccino", "Frappuccino", "Macchiato"]
 ```
 
 <div class="lookup">
@@ -1032,12 +1033,12 @@ Concept:
 
 Example:
 
-```text
+```bubblescript
 dialog order do
   say "Let's take your order..."
 
-  ask "What pizza would you like to order?",
-    expecting: ["Margherita", "Pepperoni", "Hawaii"]
+  ask "What coffee would you like to order?",
+    expecting: ["Latte", "Cappuccino", "Frappuccino"]
 
   say "We'll start preparing your #{answer}!"
 end
@@ -1053,14 +1054,14 @@ Lookup: botsi_platform/docs/docs/bubblescript/input.md
 
 Exercise:
 
-- Add `Marinara` to the accepted pizza list.
-- Try `Pasta` and confirm it is not accepted by the list.
+- Add `Espresso` to the accepted coffee list.
+- Try `tea` and confirm it is not accepted by the list.
 - Keep the confirmation line using `#{answer}`.
 
 Example target:
 
-```text
-expecting: ["Margherita", "Pepperoni", "Hawaii", "Marinara"]
+```bubblescript
+expecting: ["Latte", "Cappuccino", "Frappuccino", "Espresso"]
 ```
 
 <div class="lookup">
@@ -1079,21 +1080,21 @@ Concept:
 
 Example:
 
-```text
+```bubblescript
 dialog order do
   say "Let's take your order..."
 
-  ask "What pizza would you like to order?",
-    expecting: ["Margherita", "Pepperoni", "Hawaii"]
+  ask "What coffee would you like to order?",
+    expecting: ["Latte", "Cappuccino", "Frappuccino"]
 
   say "We'll start preparing your #{answer}!"
 
-  dialog trigger: "caprese" do
-    say "The Caprese Pizza is out of order"
+  dialog trigger: "pumpkin spice" do
+    say "The pumpkin spice Coffee is out of order"
   end
 
-  dialog trigger: "pasta" do
-    say "We don't serve pasta's, only pizza's"
+  dialog trigger: "tea" do
+    say "We don't serve teas, only coffees"
   end
 
   dialog __unknown__ do
@@ -1118,7 +1119,7 @@ Exercise:
 
 Check yourself:
 
-- Does the fallback talk about the pizza menu, not the whole bot?
+- Does the fallback talk about the coffee menu, not the whole bot?
 - Are these triggers inside `dialog order do`?
 
 <div class="lookup">
@@ -1137,17 +1138,17 @@ Concept:
 
 Example:
 
-```text
+```bubblescript
 dialog order do
   say "Let's take your order..."
 
-  ask "What pizza would you like to order?",
-    expecting: ["Margherita", "Pepperoni", "Hawaii"]
+  ask "What coffee would you like to order?",
+    expecting: ["Latte", "Cappuccino", "Frappuccino"]
 
   say "We'll start preparing your #{answer}!"
 
-  dialog trigger: "caprese", do: say "The Caprese Pizza is out of order"
-  dialog trigger: "pasta"  , do: say "We don't serve pasta's, only pizza's"
+  dialog trigger: "pumpkin spice", do: say "The pumpkin spice Coffee is out of order"
+  dialog trigger: "tea"  , do: say "We don't serve teas, only coffees"
   dialog __unknown__       , do: say "Sorry, that is not on our menu..."
 
   dialog __returning__ do
@@ -1167,14 +1168,14 @@ Lookup: botsi_platform/docs/docs/bubblescript/dialogs.md
 Exercise:
 
 - Add a `__returning__` dialog to the order flow.
-- Make it remind the guest to choose a pizza.
+- Make it remind the guest to choose a coffee.
 - Keep the message shorter than one sentence.
 
 Example target:
 
-```text
+```bubblescript
 dialog __returning__ do
-  say "Back to your pizza order..."
+  say "Back to your coffee order..."
 end
 ```
 
@@ -1194,17 +1195,17 @@ Concept:
 
 Example:
 
-```text
+```bubblescript
 dialog order do
-  menu = ["Margherita", "Pepperoni", "Hawaii"]
+  menu = ["Latte", "Cappuccino", "Frappuccino"]
 
-  say "We serve #{length(menu)} different pizzas:"
+  say "We serve #{length(menu)} different coffees:"
 
   repeat item in menu do
     say item
   end
 
-  ask "What pizza would you like to order?", expecting: menu
+  ask "What coffee would you like to order?", expecting: menu
 
   say "We'll start preparing your #{answer}!"
 
@@ -1222,14 +1223,14 @@ Lookup: botsi_platform/docs/docs/bubblescript/language.md
 
 Exercise:
 
-- Add `Marinara` to the `menu` list.
-- Change the copy from `different pizzas` to `house pizzas`.
+- Add `Espresso` to the `menu` list.
+- Change the copy from `different coffees` to `house coffees`.
 - Keep `expecting: menu`, so the validation follows the list automatically.
 
 Example target:
 
-```text
-menu = ["Margherita", "Pepperoni", "Hawaii", "Marinara"]
+```bubblescript
+menu = ["Latte", "Cappuccino", "Frappuccino", "Espresso"]
 ```
 
 <div class="lookup">
@@ -1248,21 +1249,21 @@ Concept:
 
 Example:
 
-```text
+```bubblescript
 @base_url "https://storage.googleapis.com/botsquad-assets/workshop/"
 
 @menu [
-  %{title: "Pizza Margherita", image_url: @base_url + "pizza_marg.jpg"},
-  %{title: "Pizza Pepperoni", image_url: @base_url + "pizza_pep.jpg"},
-  %{title: "Pizza Hawaii", image_url: @base_url + "pizza_haw.jpg"}
+  %{title: "Coffee Latte", image_url: @base_url + "coffee_latte.jpg"},
+  %{title: "Coffee Cappuccino", image_url: @base_url + "coffee_cap.jpg"},
+  %{title: "Coffee Frappuccino", image_url: @base_url + "coffee_frap.jpg"}
 ]
 
 @menu_titles pluck(@menu, "title")
 
 dialog order do
-  say "We serve #{length(@menu)} different pizzas:"
+  say "We serve #{length(@menu)} different coffees:"
 
-  ask "What pizza would you like to order?",
+  ask "What coffee would you like to order?",
     quick_replies: @menu,
     expecting: @menu_titles
 
@@ -1289,13 +1290,13 @@ Concept:
 
 Example:
 
-```text
+```bubblescript
 @base_url "https://storage.googleapis.com/botsquad-assets/workshop/"
 
 @menu [
-  %{value: "Margherita", title: "Pizza Margherita", image_url: @base_url + "pizza_marg.jpg", subtitle: "$5.95"},
-  %{value: "Pepperoni", title: "Pizza Pepperoni", image_url: @base_url + "pizza_pep.jpg", subtitle: "$6.95"},
-  %{value: "Hawaii", title: "Pizza Hawaii", image_url: @base_url + "pizza_haw.jpg", subtitle: "$7.95"}
+  %{value: "Latte", title: "Coffee Latte", image_url: @base_url + "coffee_latte.jpg", subtitle: "$5.95"},
+  %{value: "Cappuccino", title: "Coffee Cappuccino", image_url: @base_url + "coffee_cap.jpg", subtitle: "$6.95"},
+  %{value: "Frappuccino", title: "Coffee Frappuccino", image_url: @base_url + "coffee_frap.jpg", subtitle: "$7.95"}
 ]
 
 dialog order do
@@ -1304,7 +1305,7 @@ dialog order do
     mode: "single",
     items: @menu)
 
-  ask "What pizza would you like to order?",
+  ask "What coffee would you like to order?",
     expecting: item_picker
 
   order = [answer.data]
@@ -1355,7 +1356,7 @@ Concept:
 
 Example:
 
-```text
+```bubblescript
 if length(order) > 0 do
   say "Ok, we'll prepare your #{join_and(order)}"
 else
@@ -1373,21 +1374,21 @@ Lookup: botsi_platform/docs/docs/bubblescript/statements.md
 
 Example:
 
-```text
+```bubblescript
 branch do
   order == nil       -> say "You ordered nothing"
-  length(order) == 1 -> say "We'll prepare your pizza"
-  length(order) < 3  -> say "We'll prepare your pizzas"
+  length(order) == 1 -> say "We'll prepare your coffee"
+  length(order) < 3  -> say "We'll prepare your coffees"
 else
-  say "You ordered too many pizzas"
+  say "You ordered too many coffees"
 end
 
 branch length(order) do
   0 -> say "You've ordered nothing"
-  1 -> say "We'll prepare your pizza"
-  2 -> say "We'll prepare your pizzas"
+  1 -> say "We'll prepare your coffee"
+  2 -> say "We'll prepare your coffees"
 else
-  say "You ordered too many pizzas"
+  say "You ordered too many coffees"
 end
 ```
 
@@ -1412,18 +1413,18 @@ Concept:
 
 Example:
 
-```text
+```bubblescript
 dialog order_line when length(order) >= 5 do
   say "You reached the maximum order size..."
 end
 
 dialog order_line when length(order) == 0 do
-  ask "What pizza would you like to order?"
+  ask "What coffee would you like to order?"
   invoke order_line
 end
 
 dialog order_line do
-  ask "Do you want another pizza?"
+  ask "Do you want another coffee?"
   invoke order_line
 end
 ```
@@ -1444,7 +1445,7 @@ Concept:
 
 Example:
 
-```text
+```bubblescript
 @datetime entity(match: "[time=pickup_time]")
 
 dialog ask_pickup_time do
@@ -1473,7 +1474,7 @@ Concept:
 
 Example:
 
-```text
+```bubblescript
 perform calculate_price
 say "The total price is $ #{total}"
 
@@ -1481,8 +1482,8 @@ task calculate_price do
   total = 0
 
   repeat item in order do
-    pizza = first(@menu[value: item])
-    price = replace(pizza.subtitle, "$", "")
+    coffee = first(@menu[value: item])
+    price = replace(coffee.subtitle, "$", "")
     total = total + number(price)
   end
 end
@@ -1504,7 +1505,7 @@ Concept:
 
 Example:
 
-```text
+```bubblescript
 dialog main do
   repeat item in @menu do
     say item.title
@@ -1528,12 +1529,12 @@ Concept:
 
 Compact example:
 
-```text
+```bubblescript
 intents:
   about:
     utterances:
-      - what is Restaurant Sienna
-      - tell me about this restaurant
+      - what is Starbucks
+      - tell me about this coffee shop
       - who are you
 ```
 
@@ -1553,7 +1554,7 @@ Concept:
 
 Example:
 
-```text
+```bubblescript
 @email entity(match: "[email]")
 
 dialog ask_email do
@@ -1581,7 +1582,7 @@ Concept:
 
 Example:
 
-```text
+```bubblescript
 dialog confirm do
   perform calculate_price
   say "The total price is $ #{total}"
@@ -1607,7 +1608,7 @@ Concept:
 
 Example:
 
-```text
+```bubblescript
 task send_order do
   summary = "
   You ordered:\n - #{join(order, "\n - ")}\n
@@ -1634,15 +1635,15 @@ Concept:
 
 Compact example:
 
-```text
+```bubblescript
 manifest:
   background_color: "#f0f0f0"
   display: standalone
   orientation: portrait
   theme_color: "#990000"
 splash_screen:
-  title: Restaurant Sienna
-  description: Order your pizzas
+  title: Starbucks
+  description: Order your coffees
   call_to_action: Start
 appearance: app
 ```
@@ -1663,7 +1664,7 @@ Concept:
 
 Example:
 
-```text
+```bubblescript
 # string
 v = "This is a string"
 say v
@@ -1716,7 +1717,7 @@ Lookup: botsi_platform/docs/docs/bubblescript/getting_started.md
 
 ## Final Exercise
 
-Extend the Restaurant Sienna bot with one new capability.
+Extend the Starbucks bot with one new capability.
 
 Pick one:
 
