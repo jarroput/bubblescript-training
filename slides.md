@@ -945,7 +945,7 @@ dialog __main__ do
   dialog label: "About", do: invoke about
   dialog label: "Location", do: invoke address
   dialog label: "Order", do: invoke order
-  dialog label: "Nothing", do: invoke close
+  dialog label: "Nothing", do: close
 end
 ```
 
