@@ -30,3 +30,40 @@
   font-size: 0.9rem;
   padding: 0.75rem 1rem;
 }
+
+.agenda {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.agenda-item {
+  background: var(--dx-surface);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+}
+
+.concept {
+  border-left: 0.35rem solid var(--dx-blue);
+  padding-left: 1rem;
+}
+
+.two-column {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.pattern {
+  background: #f0fdf4;
+  border-left: 0.35rem solid #16a34a;
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+}
+
+.warning {
+  background: #fffbeb;
+  border-left: 0.35rem solid #f59e0b;
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+}
