@@ -24,11 +24,14 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Enable Corepack
+        run: corepack enable npm
+
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build
-        run: npx slidev build --base /${{github.event.repository.name}}/
+        run: npx slidev build --base /${{ github.event.repository.name }}/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
