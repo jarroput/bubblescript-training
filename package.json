@@ -12,7 +12,9 @@
     "dev": "slidev --open",
     "build": "slidev build",
     "migrate:slidescom": "node scripts/migrate-slidescom.mjs",
-    "generate:grammar": "node scripts/generate-bubblescript-grammar.mjs"
+    "generate:grammar": "node scripts/generate-bubblescript-grammar.mjs",
+    "slides:apply-theme": "node scripts/apply-theme-classes.mjs",
+    "slides:merge-concept-example": "node scripts/merge-concept-example-slides.mjs"
   },
   "devDependencies": {
     "@slidev/cli": "^52.15.2",

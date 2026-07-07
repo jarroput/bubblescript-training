@@ -2,112 +2,66 @@
 theme: default
 title: Bubblescript Basics
 colorSchema: light
+background: '#faf9fc'
+fonts:
+  sans: Inter
+  serif: Inter
+  mono: JetBrains Mono
+  provider: google
+themeConfig:
+  primary: '#883ad0'
+defaults:
+  zoom: 0.8
 info: |
-  Half-day Bubblescript training for new DialoX users and solution consultants.
+  Bubblescript training for new DialoX users and solution consultants.
 css: unocss
+
 ---
 
-<style src="./styles/theme.css"></style>
+
+<div class="chapter-label">Enreach · DialoX</div>
 
 # Bubblescript Basics
 
 Read, write, and extend conversational bots in DialoX.
 
-<div class="lookup">
-Half-day workshop - Starbucks storyline - Concept, example, exercise, lookup
-</div>
-
 ---
+
 
 ## Workshop Goal
 
 By the end, you can:
 
-- Read basic Bubblescript examples.
-- Write small dialogs with `say`, `ask`, and `show`.
-- Split a bot into dialogs and triggers.
-- Recognize when to use BML, constants, prompts, branches, and tasks.
-- Find the right docs or pattern when you have a new bot idea.
+- Read and write Bubblescript
+- Design a conversation around dialogs
+- Use intents and LLM prompts to build free flowing conversations
+- Build integrations with third parties
 
 ---
+
 
 ## Workshop Ladder
 
 <div class="agenda">
-  <div class="agenda-item">1. First bot</div>
-  <div class="agenda-item">2. Dialogs and triggers</div>
-  <div class="agenda-item">3. Matching and intents</div>
-  <div class="agenda-item">4. Guided input</div>
-  <div class="agenda-item">5. Data and UI widgets</div>
-  <div class="agenda-item">6. Logic and guards</div>
-  <div class="agenda-item">7. Tasks and side effects</div>
-  <div class="agenda-item">8. Next ideas</div>
+  <div class="agenda-item" data-step="1">First bot</div>
+  <div class="agenda-item" data-step="2">Dialogs and triggers</div>
+  <div class="agenda-item" data-step="3">Matching and intents</div>
+  <div class="agenda-item" data-step="4">Guided input</div>
+  <div class="agenda-item" data-step="5">Data and UI widgets</div>
+  <div class="agenda-item" data-step="6">Logic and guards</div>
+  <div class="agenda-item" data-step="7">Tasks and side effects</div>
+  <div class="agenda-item" data-step="8">Next ideas</div>
 </div>
 
 ---
-
-## First Starbucks Bot
-
-Concept:
-
-- A bot starts in `__main__`.
-- Statements run from top to bottom.
-- `ask` waits for the user and stores the response in `answer`.
-- `close` ends the conversation.
-
-<div class="lookup">
-Lookup: botsi_platform/docs/docs/bubblescript/getting_started.md
-</div>
-
----
-
-## First Starbucks Bot Example
-
-Starbucks as one complete flow:
-
-```bubblescript
-dialog __main__ do
-  say "Welcome to Starbucks"
-  show image "starbucks.jpg"
-  say "We serve delicious coffees and pastries."
-
-  say "We are located at Joan Muyskenweg 22 in Amsterdam"
-  show location [lat: 52.3326472, lon: 4.91505839]
-
-  ask "What would you like to order?"
-  say "We'll start preparing your #{answer}"
-
-  say "Goodbye"
-  close
-end
-```
-
-<div class="lookup">
-Lookup: botsi_platform/docs/docs/bubblescript/examples.md
-</div>
-
----
-
-## First Starbucks Bot Exercise
-
-Exercise:
-
-- Change the welcome copy.
-- Swap the coffee shop image.
-- Adjust the goodbye message.
-
-Check yourself:
-
-- Does the script still read in the exact order the guest will experience it?
-- Is every user-facing text useful?
-
-<div class="lookup">
-Lookup: botsi_platform/docs/docs/bubblescript/statements.md
-</div>
-
+layout: two-cols-header
 ---
 
 ## Say, Ask, And Show
+
+::left::
+
+<div class="concept">
 
 Concept:
 
@@ -116,13 +70,15 @@ Concept:
 - `show` sends media, widgets, or locations.
 - Use `#{answer}` when you need the last answer inside text.
 
+</div>
+
+
+
 <div class="lookup">
 Lookup: botsi_platform/docs/docs/bubblescript/statements.md
 </div>
 
----
-
-## Say, Ask, And Show Example
+::right::
 
 Starbucks greeting, media, address, and order:
 
@@ -148,20 +104,32 @@ Lookup: botsi_platform/docs/docs/bubblescript/ui.md
 
 ## Say, Ask, And Show Exercise
 
+<div class="exercise">
+
 Exercise:
 
 - Add a `say` line that explains today's special.
-- Add a `show image` line for the special.
 - Ask whether the guest wants a table or takeaway.
-- Echo the answer back in a confirmation sentence.
+- Say the answer back in a confirmation sentence.
+
+</div>
+
+
 
 <div class="lookup">
 Lookup: botsi_platform/docs/docs/bubblescript/input.md
 </div>
 
 ---
+layout: two-cols-header
+---
 
 ## Dialogs And Triggers
+
+::left::
+
+
+<div class="concept">
 
 Concept:
 
@@ -170,13 +138,16 @@ Concept:
 - Triggers use BML, so `"location | address"` means either word can match.
 - The first matching triggered dialog handles the message.
 
+</div>
+
+
+
 <div class="lookup">
 Lookup: botsi_platform/docs/docs/bubblescript/dialogs.md
 </div>
 
----
+::right::
 
-## Dialogs And Triggers Example
 
 Split Starbucks into small triggered intents:
 
@@ -213,7 +184,10 @@ Lookup: botsi_platform/docs/docs/bubblescript/bml.md
 
 ---
 
+
 ## Dialogs And Triggers Exercise
+
+<div class="exercise">
 
 Exercise:
 
@@ -222,13 +196,24 @@ Exercise:
 - Add one trigger for opening hours.
 - Test the wording by sending short user messages, not full sentences.
 
+</div>
+
+
+
 <div class="lookup">
 Lookup: botsi_platform/docs/docs/bubblescript/match_engine.md
 </div>
 
 ---
+layout: two-cols-header
+---
 
 ## Special Dialogs
+
+::left::
+
+
+<div class="concept">
 
 Concept:
 
@@ -237,13 +222,16 @@ Concept:
 - `__unknown__` runs when the user says something that matches no trigger.
 - `__closed__` runs when the conversation is closing.
 
+</div>
+
+
+
 <div class="lookup">
 Lookup: botsi_platform/docs/docs/bubblescript/dialogs.md
 </div>
 
----
+::right::
 
-## Special Dialogs Example
 
 Starbucks fallback behavior:
 
@@ -273,19 +261,32 @@ Lookup: botsi_platform/docs/docs/bubblescript/dialogs.md
 
 ## Special Dialogs Exercise
 
+<div class="exercise">
+
 Exercise:
 
-- Change `__root__` into a useful Starbucks menu prompt.
+- Add `__root__` with a useful Starbucks prompt.
 - Make `__unknown__` suggest examples: about, location, order, stop.
 - Keep `__closed__` short and final.
+
+</div>
+
+
 
 <div class="lookup">
 Lookup: botsi_platform/docs/docs/bubblescript/statements.md
 </div>
 
 ---
+layout: two-cols-header
+---
 
 ## Invoke A Named Dialog
+
+::left::
+
+
+<div class="concept">
 
 Concept:
 
@@ -294,13 +295,16 @@ Concept:
 - This keeps shared content in one place.
 - A named dialog can also have a trigger.
 
+</div>
+
+
+
 <div class="lookup">
 Lookup: botsi_platform/docs/docs/bubblescript/dialogs.md
 </div>
 
----
+::right::
 
-## Invoke A Named Dialog Example
 
 Call the same Starbucks "about" answer from startup and from a trigger:
 
@@ -326,6 +330,7 @@ Lookup: botsi_platform/docs/docs/bubblescript/statements.md
 
 ---
 
+
 ## Dialog Stack Mental Model
 
 Text model:
@@ -345,7 +350,10 @@ Lookup: botsi_platform/docs/docs/bubblescript/dialogs.md
 
 ---
 
+
 ## Invoke A Named Dialog Exercise
+
+<div class="exercise">
 
 Exercise:
 
@@ -354,28 +362,41 @@ Exercise:
 - Give `address` a trigger: `"location | address"`.
 - Keep the coordinates exactly: `[lat: 52.3326472, lon: 4.91505839]`.
 
+</div>
+
+
+
 <div class="lookup">
 Lookup: botsi_platform/docs/docs/bubblescript/examples.md
 </div>
 
 ---
+layout: two-cols-header
+---
 
 ## Prompt And Continue
 
+::left::
+
+
+<div class="concept">
+
 Concept:
 
-- `prompt` keeps the current dialog open while the bot waits for user input.
-- Triggered dialogs can run while the prompt is waiting.
-- `continue` exits the current prompt or ask.
+- `prompt` keeps prompting for user input.
+- `continue` breaks out of the current prompt.
 - `close` ends the whole conversation.
+
+</div>
+
+
 
 <div class="lookup">
 Lookup: botsi_platform/docs/docs/bubblescript/statements.md
 </div>
 
----
+::right::
 
-## Prompt And Continue Example
 
 Keep Starbucks open until the guest is done:
 
@@ -404,6 +425,7 @@ Lookup: botsi_platform/docs/docs/bubblescript/input.md
 </div>
 
 ---
+
 
 ## Prompt And Continue Reprompting
 
@@ -440,20 +462,32 @@ Lookup: botsi_platform/docs/docs/bubblescript/statements.md
 
 ## Prompt And Continue Exercise
 
+<div class="exercise">
+
 Exercise:
 
-- Add triggers for `about`, `location`, and `order`.
-- Wrap the service flow in a `prompt` list.
+- Use `prompt` in your main menu.
 - Make `nothing | stop | bye | close` use `continue`.
-- Confirm that goodbye happens after leaving the prompt.
+- Use `close` after the prompt is finished.
+
+</div>
+
+
 
 <div class="lookup">
 Lookup: botsi_platform/docs/docs/bubblescript/dialogs.md
 </div>
 
 ---
+layout: two-cols-header
+---
 
 ## Random Responses
+
+::left::
+
+
+<div class="concept">
 
 Concept:
 
@@ -462,13 +496,16 @@ Concept:
 - Keep each random branch equivalent in meaning.
 - Do not hide business logic inside random responses.
 
+</div>
+
+
+
 <div class="lookup">
 Lookup: botsi_platform/docs/docs/bubblescript/statements.md
 </div>
 
----
+::right::
 
-## Random Responses Example
 
 Vary the Starbucks welcome without changing the flow:
 
@@ -488,7 +525,10 @@ Lookup: botsi_platform/docs/docs/bubblescript/conditionals.md
 
 ---
 
+
 ## Random Responses Exercise
+
+<div class="exercise">
 
 Exercise:
 
@@ -496,19 +536,36 @@ Exercise:
 - Keep each option short.
 - Do not put `ask` inside the `random` block for this exercise.
 
+</div>
+
+
+
+<div class="pattern">
+
 Example target:
 
 ```bubblescript
 say "We'll start preparing your #{answer}"
 ```
 
+</div>
+
+
+
 <div class="lookup">
 Lookup: botsi_platform/docs/docs/bubblescript/statements.md
 </div>
 
 ---
+layout: two-cols-header
+---
 
 ## Once And After
+
+::left::
+
+
+<div class="concept">
 
 Concept:
 
@@ -517,13 +574,16 @@ Concept:
 - Use this for escalating fallback messages.
 - It is useful in `__unknown__`.
 
+</div>
+
+
+
 <div class="lookup">
 Lookup: botsi_platform/docs/docs/bubblescript/conditionals.md
 </div>
 
----
+::right::
 
-## Once And After Example
 
 Escalate Starbucks's unknown-message handling:
 
@@ -547,12 +607,18 @@ Lookup: botsi_platform/docs/docs/bubblescript/dialogs.md
 
 ## Once And After Exercise
 
+<div class="exercise">
+
 Exercise:
 
-- Make the first unknown message suggest `about`, `location`, and `order`.
+- Make the first `__unknown__` message suggest `about`, `location`, and `order`.
 - Make the second unknown message ask the guest to type one of those words.
 - In `after`, close politely.
 - Avoid adding a fourth fallback line.
+
+</div>
+
+
 
 <div class="lookup">
 Lookup: botsi_platform/docs/docs/bubblescript/conditionals.md
@@ -562,26 +628,28 @@ Lookup: botsi_platform/docs/docs/bubblescript/conditionals.md
 
 ## User Intent
 
+<div class="concept">
+
 Concept:
 
 - An intent identifies what the user wants to do.
 - Intent classification maps messy user text to one clear bot action.
-- In Starbucks, "Tell me about the coffee shop" should route to the about answer.
-- "Tell me about the weather" should not route to the coffee shop answer.
+- Intents can be local (in scope to the question) or global (outside of scope)
 
-Example user text:
+</div>
 
-```bubblescript
-i want to know the weather forecast for today
-```
+
 
 <div class="lookup">
-Lookup: botsi_platform/docs/docs/bubblescript/bml.md
+Lookup: https://developer.dialox.ai/platform/nlp/bubblescript
 </div>
 
 ---
 
+
 ## User Intent Exercise
+
+<div class="exercise">
 
 Exercise:
 
@@ -589,10 +657,20 @@ Exercise:
 - Write one phrase that looks similar but should not match the coffee shop.
 - Keep the phrases as full sentences, not only keywords.
 
+</div>
+
+
+
+<div class="warning">
+
 Check yourself:
 
 - Would a human classify each phrase the same way?
 - Is the intent about the user's goal, not the exact words?
+
+</div>
+
+
 
 <div class="lookup">
 Lookup: botsi_platform/docs/docs/bubblescript/match_engine.md
@@ -600,13 +678,20 @@ Lookup: botsi_platform/docs/docs/bubblescript/match_engine.md
 
 ---
 
+
 ## Intent Classification Challenge
+
+<div class="concept">
 
 Concept:
 
 - Similar sentences can ask for different things.
 - Keyword-only matching is often too broad.
 - Use BML to describe the sentence shape you expect.
+
+</div>
+
+
 
 Try to classify:
 
@@ -627,7 +712,10 @@ Lookup: botsi_platform/docs/docs/bubblescript/bml.md
 
 ---
 
+
 ## Bubblescript Matching Language
+
+<div class="concept">
 
 Concept:
 
@@ -637,11 +725,21 @@ Concept:
 - `_` matches a short span of unrelated words.
 - Parentheses group alternatives.
 
+</div>
+
+
+
+<div class="pattern">
+
 Example pattern:
 
 ```bubblescript
 about _ (coffee shop | starbucks)
 ```
+
+</div>
+
+
 
 This matches:
 
@@ -656,7 +754,10 @@ Lookup: botsi_platform/docs/docs/bubblescript/bml.md
 
 ---
 
+
 ## Bubblescript Matching Language Exercise
+
+<div class="exercise">
 
 Exercise:
 
@@ -664,16 +765,32 @@ Exercise:
 - Add one extra Starbucks synonym, such as `place`.
 - Keep the weather example out of the match.
 
+</div>
+
+
+
+<div class="pattern">
+
 Example target:
 
 ```bubblescript
 about _ (coffee shop | starbucks | place)
 ```
 
+</div>
+
+
+
+<div class="warning">
+
 Check yourself:
 
 - Does "Tell me about the weather" still fail to match?
 - Does "Tell me about the place starbucks" still match?
+
+</div>
+
+
 
 <div class="lookup">
 Lookup: https://bml.dialox.ai/
@@ -681,13 +798,20 @@ Lookup: https://bml.dialox.ai/
 
 ---
 
+
 ## Intent Definition
+
+<div class="concept">
 
 Concept:
 
 - `intent(match: [...])` gives a nameable intent to one or more BML patterns.
 - A dialog can trigger on that intent.
 - The dialog body remains normal Bubblescript.
+
+</div>
+
+
 
 Example:
 
@@ -703,7 +827,10 @@ Lookup: botsi_platform/docs/docs/bubblescript/bml.md
 
 ---
 
+
 ## Intent Definition Exercise
+
+<div class="exercise">
 
 Exercise:
 
@@ -712,6 +839,10 @@ Exercise:
 - Change the answer to mention delicious coffees and pastries.
 
 Starting point:
+
+</div>
+
+
 
 ```bubblescript
 dialog trigger: intent(match: ["about _ (coffee shop | starbucks)"]) do
@@ -725,13 +856,20 @@ Lookup: botsi_platform/docs/docs/bubblescript/dialogs.md
 
 ---
 
+
 ## Global Constants
+
+<div class="concept">
 
 Concept:
 
 - Put reusable intents in global constants.
 - Constants start with `@`.
 - Triggered dialogs can use the constant instead of repeating the intent definition.
+
+</div>
+
+
 
 Example:
 
@@ -751,13 +889,22 @@ Lookup: botsi_platform/docs/docs/bubblescript/bml.md
 
 ---
 
+
 ## Global Constants Exercise
+
+<div class="exercise">
 
 Exercise:
 
 - Create `@weather` for weather questions.
 - Create `@about` for Starbucks questions.
 - Make sure coffee shop and weather messages trigger different dialogs.
+
+</div>
+
+
+
+<div class="pattern">
 
 Example target:
 
@@ -766,19 +913,30 @@ Example target:
 @about   intent(match: ["about _ (coffee shop | starbucks)"])
 ```
 
+</div>
+
+
+
 <div class="lookup">
 Lookup: botsi_platform/docs/docs/bubblescript/constants.md
 </div>
 
 ---
 
+
 ## Short Form Dialog Notation
+
+<div class="concept">
 
 Concept:
 
 - Short-form dialogs keep routing code compact.
 - Use it when the triggered action is a single statement.
 - It reads well for intent-to-dialog routing.
+
+</div>
+
+
 
 Example:
 
@@ -796,7 +954,10 @@ Lookup: botsi_platform/docs/docs/bubblescript/dialogs.md
 
 ---
 
+
 ## Short Form Dialog Notation Exercise
+
+<div class="exercise">
 
 Exercise:
 
@@ -804,11 +965,21 @@ Exercise:
 - Use `invoke about`.
 - Leave the named `dialog about do` unchanged.
 
+</div>
+
+
+
+<div class="pattern">
+
 Example target:
 
 ```bubblescript
 dialog trigger: @about, do: invoke about
 ```
+
+</div>
+
+
 
 <div class="lookup">
 Lookup: botsi_platform/docs/docs/bubblescript/statements.md
@@ -816,7 +987,10 @@ Lookup: botsi_platform/docs/docs/bubblescript/statements.md
 
 ---
 
+
 ## Intent, Trigger, Dialog Pattern
+
+<div class="concept">
 
 Concept:
 
@@ -824,6 +998,10 @@ Concept:
 - Route the trigger to a named dialog.
 - Keep the answer in the named dialog.
 - This separates matching from conversation content.
+
+</div>
+
+
 
 Example:
 
@@ -858,7 +1036,10 @@ Lookup: botsi_platform/docs/docs/bubblescript/dialogs.md
 
 ---
 
+
 ## Intent, Trigger, Dialog Pattern Exercise
+
+<div class="exercise">
 
 Exercise:
 
@@ -866,11 +1047,21 @@ Exercise:
 - Route `@hours` to `invoke hours`.
 - Add `dialog hours do` with one clear answer.
 
+</div>
+
+
+
+<div class="warning">
+
 Check yourself:
 
 - Is the intent definition at the top?
 - Is the trigger only routing?
 - Is the answer in the named dialog?
+
+</div>
+
+
 
 <div class="lookup">
 Lookup: botsi_platform/docs/docs/bubblescript/examples.md
@@ -878,7 +1069,10 @@ Lookup: botsi_platform/docs/docs/bubblescript/examples.md
 
 ---
 
+
 ## Examples Of BML
+
+<div class="concept">
 
 Concept:
 
@@ -887,6 +1081,10 @@ Concept:
 - Use alternatives when several words mean the same route.
 
 Weather examples:
+
+</div>
+
+
 
 ```bubblescript
 what _ be _ weather
@@ -908,7 +1106,10 @@ Lookup: https://bml.dialox.ai/
 
 ---
 
+
 ## Examples Of BML Exercise
+
+<div class="exercise">
 
 Exercise:
 
@@ -917,6 +1118,10 @@ Exercise:
 - Do not make either phrase match "weather".
 
 Starting point:
+
+</div>
+
+
 
 ```bubblescript
 @menu intent(match: ["menu | card"])
@@ -929,13 +1134,20 @@ Lookup: botsi_platform/docs/docs/bubblescript/bml.md
 
 ---
 
+
 ## Inner Dialog Labels
+
+<div class="concept">
 
 Concept:
 
 - Inner dialogs can be shown as labeled choices inside a prompt.
 - Labels are useful when the channel supports buttons or menu-like options.
 - Each label can invoke the same named dialog used by text triggers.
+
+</div>
+
+
 
 Example:
 
@@ -956,7 +1168,10 @@ Lookup: botsi_platform/docs/docs/bubblescript/dialogs.md
 
 ---
 
+
 ## Inner Dialog Labels Exercise
+
+<div class="exercise">
 
 Exercise:
 
@@ -964,11 +1179,21 @@ Exercise:
 - Add a matching named `dialog menu do`.
 - Keep the label short enough for a button.
 
+</div>
+
+
+
+<div class="pattern">
+
 Example target:
 
 ```bubblescript
 dialog label: "Menu", do: invoke menu
 ```
+
+</div>
+
+
 
 <div class="lookup">
 Lookup: botsi_platform/docs/docs/bubblescript/input.md
@@ -976,13 +1201,20 @@ Lookup: botsi_platform/docs/docs/bubblescript/input.md
 
 ---
 
+
 ## Quick Replies
+
+<div class="concept">
 
 Concept:
 
 - `quick_replies:` suggests visible answer buttons.
 - The user can still type something else.
 - Use quick replies when you want to guide input without hard validation.
+
+</div>
+
+
 
 Example:
 
@@ -1003,7 +1235,10 @@ Lookup: botsi_platform/docs/docs/bubblescript/input.md
 
 ---
 
+
 ## Quick Replies Exercise
+
+<div class="exercise">
 
 Exercise:
 
@@ -1011,11 +1246,21 @@ Exercise:
 - Keep the question text unchanged.
 - Type an answer that is not shown as a quick reply and observe that it can still continue.
 
+</div>
+
+
+
+<div class="pattern">
+
 Example target:
 
 ```bubblescript
 quick_replies: ["Latte", "Cappuccino", "Frappuccino", "Macchiato"]
 ```
+
+</div>
+
+
 
 <div class="lookup">
 Lookup: botsi_platform/docs/docs/bubblescript/statements.md
@@ -1023,13 +1268,20 @@ Lookup: botsi_platform/docs/docs/bubblescript/statements.md
 
 ---
 
+
 ## Expecting
+
+<div class="concept">
 
 Concept:
 
 - `expecting:` validates or classifies the answer to an `ask`.
 - With a list of strings, only those matches are accepted.
 - Use it when the bot needs one of a controlled set of answers.
+
+</div>
+
+
 
 Example:
 
@@ -1050,7 +1302,10 @@ Lookup: botsi_platform/docs/docs/bubblescript/input.md
 
 ---
 
+
 ## Expecting Exercise
+
+<div class="exercise">
 
 Exercise:
 
@@ -1058,11 +1313,21 @@ Exercise:
 - Try `tea` and confirm it is not accepted by the list.
 - Keep the confirmation line using `#{answer}`.
 
+</div>
+
+
+
+<div class="pattern">
+
 Example target:
 
 ```bubblescript
 expecting: ["Latte", "Cappuccino", "Frappuccino", "Espresso"]
 ```
+
+</div>
+
+
 
 <div class="lookup">
 Lookup: botsi_platform/docs/docs/bubblescript/bml.md
@@ -1070,13 +1335,20 @@ Lookup: botsi_platform/docs/docs/bubblescript/bml.md
 
 ---
 
+
 ## Inner Dialog Triggers
+
+<div class="concept">
 
 Concept:
 
 - Inner triggers belong to the surrounding dialog.
 - They handle special answers while the bot is inside that dialog.
 - Use `dialog __unknown__` inside the dialog for local fallback copy.
+
+</div>
+
+
 
 Example:
 
@@ -1109,7 +1381,10 @@ Lookup: botsi_platform/docs/docs/bubblescript/dialogs.md
 
 ---
 
+
 ## Inner Dialog Triggers Exercise
+
+<div class="exercise">
 
 Exercise:
 
@@ -1117,10 +1392,20 @@ Exercise:
 - Make it say that calzone is only available at lunch.
 - Add or improve the inner `__unknown__` fallback.
 
+</div>
+
+
+
+<div class="warning">
+
 Check yourself:
 
 - Does the fallback talk about the coffee menu, not the whole bot?
 - Are these triggers inside `dialog order do`?
+
+</div>
+
+
 
 <div class="lookup">
 Lookup: botsi_platform/docs/docs/bubblescript/input.md
@@ -1128,13 +1413,20 @@ Lookup: botsi_platform/docs/docs/bubblescript/input.md
 
 ---
 
+
 ## __returning__
+
+<div class="concept">
 
 Concept:
 
 - `__returning__` runs when control returns to a dialog.
 - It is useful after a nested triggered dialog handled a side case.
 - Keep it short: remind the user what they were doing.
+
+</div>
+
+
 
 Example:
 
@@ -1163,13 +1455,22 @@ Lookup: botsi_platform/docs/docs/bubblescript/dialogs.md
 
 ---
 
+
 ## __returning__ Exercise
+
+<div class="exercise">
 
 Exercise:
 
 - Add a `__returning__` dialog to the order flow.
 - Make it remind the guest to choose a coffee.
 - Keep the message shorter than one sentence.
+
+</div>
+
+
+
+<div class="pattern">
 
 Example target:
 
@@ -1179,19 +1480,30 @@ dialog __returning__ do
 end
 ```
 
+</div>
+
+
+
 <div class="lookup">
 Lookup: botsi_platform/docs/docs/bubblescript/input.md
 </div>
 
 ---
 
+
 ## Lists
+
+<div class="concept">
 
 Concept:
 
 - Lists hold multiple values in order.
 - Use lists for menus, accepted answers, order lines, and other repeated data.
 - `repeat item in list do` is the common way to visit every item.
+
+</div>
+
+
 
 Example:
 
@@ -1219,7 +1531,10 @@ Lookup: botsi_platform/docs/docs/bubblescript/language.md
 
 ---
 
+
 ## Lists Exercise
+
+<div class="exercise">
 
 Exercise:
 
@@ -1227,11 +1542,21 @@ Exercise:
 - Change the copy from `different coffees` to `house coffees`.
 - Keep `expecting: menu`, so the validation follows the list automatically.
 
+</div>
+
+
+
+<div class="pattern">
+
 Example target:
 
 ```bubblescript
 menu = ["Latte", "Cappuccino", "Frappuccino", "Espresso"]
 ```
+
+</div>
+
+
 
 <div class="lookup">
 Lookup: botsi_platform/docs/docs/bubblescript/statements.md
@@ -1239,13 +1564,20 @@ Lookup: botsi_platform/docs/docs/bubblescript/statements.md
 
 ---
 
+
 ## Maps And Global Constants
+
+<div class="concept">
 
 Concept:
 
 - Maps group related fields, like a title and image URL for one menu item.
 - Global constants start with `@` and are reusable across dialogs and tasks.
 - `pluck(@menu, "title")` extracts one field from each map.
+
+</div>
+
+
 
 Example:
 
@@ -1279,7 +1611,10 @@ Lookup: botsi_platform/docs/docs/bubblescript/language.md
 
 ---
 
+
 ## Item Picker
+
+<div class="concept">
 
 Concept:
 
@@ -1287,6 +1622,10 @@ Concept:
 - Each item can carry display fields like `title`, `subtitle`, and `image_url`.
 - Widget submissions are structured: use `answer.data` for the stored value.
 - Use `answer.text` when you need the display text the user saw.
+
+</div>
+
+
 
 Example:
 
@@ -1319,7 +1658,10 @@ Lookup: botsi_platform/docs/docs/bubblescript/input.md
 
 ---
 
+
 ## UI Widgets
+
+<div class="concept">
 
 Concept:
 
@@ -1340,19 +1682,30 @@ Common widget capabilities:
 - Wait control
 - Closed control
 
+</div>
+
+
+
 <div class="lookup">
 Lookup: botsi_platform/docs/docs/bubblescript/input.md
 </div>
 
 ---
 
+
 ## Conditionals
+
+<div class="concept">
 
 Concept:
 
 - Use `if` for one yes/no decision.
 - Use `branch` when several cases are easier to read as a table.
 - Always keep the fallback path explicit when the bot has to continue.
+
+</div>
+
+
 
 Example:
 
@@ -1369,6 +1722,7 @@ Lookup: botsi_platform/docs/docs/bubblescript/statements.md
 </div>
 
 ---
+
 
 ## Conditionals With Branch
 
@@ -1392,10 +1746,16 @@ else
 end
 ```
 
+<div class="warning">
+
 Check yourself:
 
 - The first branch checks full expressions.
 - The second branch matches against `length(order)`.
+
+</div>
+
+
 
 <div class="lookup">
 Lookup: botsi_platform/docs/docs/bubblescript/statements.md
@@ -1403,13 +1763,20 @@ Lookup: botsi_platform/docs/docs/bubblescript/statements.md
 
 ---
 
+
 ## Guards
+
+<div class="concept">
 
 Concept:
 
 - `when` guards choose a dialog variant before the dialog body runs.
 - Put the most specific guarded dialogs above the default dialog.
 - Guards are useful for order limits, missing data, and state-dependent flow.
+
+</div>
+
+
 
 Example:
 
@@ -1435,13 +1802,20 @@ Lookup: botsi_platform/docs/docs/bubblescript/dialogs.md
 
 ---
 
+
 ## Entities
+
+<div class="concept">
 
 Concept:
 
 - Entities extract structured values from natural language.
 - `entity(match: "[time=pickup_time]")` asks for a time and stores the matched value under `pickup_time`.
 - Use the structured value for formatting, calculations, and validation.
+
+</div>
+
+
 
 Example:
 
@@ -1463,14 +1837,32 @@ Lookup: botsi_platform/docs/docs/bubblescript/entities.md
 </div>
 
 ---
+layout: two-cols-header
+---
 
 ## Tasks
+
+::left::
+
+
+<div class="concept">
 
 Concept:
 
 - `perform` runs a `task`.
 - Tasks are good for calculations, side effects, and reusable workflow steps.
 - Variables set in a task can be used after `perform` completes.
+
+</div>
+
+
+
+<div class="lookup">
+Lookup: botsi_platform/docs/docs/bubblescript/tasks.md
+</div>
+
+::right::
+
 
 Example:
 
@@ -1495,13 +1887,20 @@ Lookup: botsi_platform/docs/docs/bubblescript/tasks.md
 
 ---
 
+
 ## CMS
+
+<div class="concept">
 
 Concept:
 
 - Content can live outside the dialog when the same data is reused often.
 - A CMS or content file can expose constants like `@menu`.
 - Dialogs can stay focused on conversation flow instead of data entry.
+
+</div>
+
+
 
 Example:
 
@@ -1519,7 +1918,10 @@ Lookup: Studio content and CMS documentation
 
 ---
 
+
 ## Intent YAML
+
+<div class="concept">
 
 Concept:
 
@@ -1528,6 +1930,10 @@ Concept:
 - Keep utterances realistic: short phrases people might actually type.
 
 Compact example:
+
+</div>
+
+
 
 ```bubblescript
 intents:
@@ -1544,13 +1950,20 @@ Lookup: Studio intent and NLP documentation
 
 ---
 
+
 ## User Data
+
+<div class="concept">
 
 Concept:
 
 - `user` stores data about the current user.
 - `remember` persists a value so it is available in later conversations.
 - Only remember data the bot should actually reuse.
+
+</div>
+
+
 
 Example:
 
@@ -1572,13 +1985,20 @@ Lookup: botsi_platform/docs/docs/bubblescript/user-data.md
 
 ---
 
+
 ## Tagging
+
+<div class="concept">
 
 Concept:
 
 - Tags mark that something important happened.
 - They are useful for analytics, segmentation, and follow-up automation.
 - Place tags after the action they represent has succeeded.
+
+</div>
+
+
 
 Example:
 
@@ -1598,13 +2018,20 @@ Lookup: botsi_platform/docs/docs/bubblescript/statements.md
 
 ---
 
+
 ## Mail
+
+<div class="concept">
 
 Concept:
 
 - A task can send an email after the order is confirmed.
 - Build the message from the order, total, and pickup time.
 - Keep mail tasks small so they are easy to replace with another integration later.
+
+</div>
+
+
 
 Example:
 
@@ -1625,7 +2052,10 @@ Lookup: botsi_platform/docs/docs/bubblescript/tasks.md
 
 ---
 
+
 ## PWA Settings
+
+<div class="concept">
 
 Concept:
 
@@ -1635,12 +2065,16 @@ Concept:
 
 Compact example:
 
+</div>
+
+
+
 ```bubblescript
 manifest:
-  background_color: "#f0f0f0"
+  background_color: "#f6f6f6"
   display: standalone
   orientation: portrait
-  theme_color: "#990000"
+  theme_color: "#883ad0"
 splash_screen:
   title: Starbucks
   description: Order your coffees
@@ -1654,13 +2088,20 @@ Lookup: Studio PWA settings
 
 ---
 
+
 ## Variables
+
+<div class="concept">
 
 Concept:
 
 - Variables can hold strings, integers, lists, maps, and structured answers.
 - Name variables after the thing they represent.
 - Reassign only when the new value is still the same concept.
+
+</div>
+
+
 
 Example:
 
@@ -1684,6 +2125,7 @@ Lookup: botsi_platform/docs/docs/bubblescript/language.md
 
 ---
 
+
 ## When You Have A New Idea
 
 Start by naming the shape of the idea:
@@ -1702,6 +2144,7 @@ Lookup: botsi_platform/docs/docs/bubblescript/getting_started.md
 
 ---
 
+
 ## Docs Lookup Map
 
 - Getting started: `botsi_platform/docs/docs/bubblescript/getting_started.md`
@@ -1715,7 +2158,10 @@ Lookup: botsi_platform/docs/docs/bubblescript/getting_started.md
 
 ---
 
+
 ## Final Exercise
+
+<div class="exercise">
 
 Extend the Starbucks bot with one new capability.
 
@@ -1734,8 +2180,16 @@ Keep the extension small:
 3. Test one wrong or surprising user answer.
 4. Add a lookup note for the docs you used.
 
+</div>
+
 ---
+
+
+<div class="chapter-label">Enreach · DialoX</div>
 
 # This Deck Is The Narrative Source
 
+<div class="lookup">
 Slides.com was the migration seed; this deck is now the narrative source.
+</div>
+iv>

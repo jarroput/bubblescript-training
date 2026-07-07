@@ -56,6 +56,8 @@ Edit slide content in `slides.md`; keep Bubblescript examples embedded there for
 
 Put static images and media in `public/`. Use `styles/theme.css` for shared deck styling.
 
+See [`docs/slide-authoring.md`](docs/slide-authoring.md) for slide layout conventions: two-column concept+example slides, theme CSS classes, headmatter defaults, and maintenance scripts.
+
 Add reusable Slidev/Vue components to `components/` only when they reduce repeated markup or make a slide clearer.
 
 ## Maintenance Rule
@@ -73,7 +75,8 @@ Use `botsi_platform` as the correctness source for Bubblescript behavior. These 
 
 Each concept chapter should use this rhythm:
 
-1. Concept: explain the idea and the problem it solves.
-2. Example: show the smallest useful restaurant-bot snippet.
-3. Guided edit: ask participants to change one local thing.
-4. Lookup anchor: link the concept back to docs or a reusable pattern.
+1. **Concept + example** — one `two-cols-header` slide (concept left, example right).
+2. **Exercise** — separate slide with a guided edit.
+3. **Lookup anchor** — docs path in a `.lookup` chip on each slide that needs it.
+
+Authoring details, CSS classes, and scripts: [`docs/slide-authoring.md`](docs/slide-authoring.md).
